@@ -33,14 +33,15 @@ export const CanvasComponent: React.FC<CanvasComponentProps> = (props: CanvasCom
     for (let x = 0; x < img.width; x++) {
       for (let y = 0; y < img.height; y++) {
 
-        let initialPoint = new Point((x / img.width) * 2 - 1, (y / img.height) * 2 - 2);
+        let initialPoint = new Point((x / img.width) * 4 - 2, (y / img.height) * 4 - 2);
 
         let previousPoint = getNextIteration(initialPoint);
         let currentPoint = getNextIteration(previousPoint);
 
         let iteration = 0;
 
-        while (Math.abs(currentPoint.x - previousPoint.x) > epsilon * epsilon) {
+        while (Math.abs(currentPoint.x - previousPoint.x) > epsilon * epsilon &&
+            iteration <= 500) {
           previousPoint = currentPoint;
           currentPoint = getNextIteration(currentPoint);
           iteration++;
@@ -49,12 +50,23 @@ export const CanvasComponent: React.FC<CanvasComponentProps> = (props: CanvasCom
         let pointColor = p5.color(0, 0, 0, 1);
         let alpha = (iteration / 20) + 0.5;
 
-        if (Math.abs(currentPoint.x - 1) < epsilon) {
-          pointColor = p5.color(props.hueValues[0], 80, 40, alpha);
-        } else {
-          pointColor = currentPoint.y > 0
-            ? p5.color(props.hueValues[1], 80, 40, alpha)
-            : p5.color(props.hueValues[2], 80, 40, alpha);
+        if(props.orderValue === 3) {
+          if (Math.abs(currentPoint.x - 1) < epsilon) {
+            pointColor = p5.color(props.hueValues[0], 80, 40, alpha);
+          } else {
+            pointColor = currentPoint.y > 0
+                ? p5.color(props.hueValues[1], 80, 40, alpha)
+                : p5.color(props.hueValues[2], 80, 40, alpha);
+          }
+        } else if (props.orderValue === 4) {
+          if (Math.abs(currentPoint.x - 1) < epsilon)
+            pointColor = p5.color(props.hueValues[0], 80, 40, alpha);
+          else if (Math.abs(currentPoint.x + 1) < epsilon)
+            pointColor = p5.color(props.hueValues[1], 80, 40, alpha);
+          else if (Math.abs(currentPoint.y - 1) < epsilon)
+            pointColor = p5.color(props.hueValues[2], 80, 40, alpha);
+          else if (Math.abs(currentPoint.y + 1) < epsilon)
+            pointColor = p5.color(props.hueValues[3], 80, 40, alpha);
         }
 
         writeColor(p5, img, pointColor, x, y);
@@ -76,13 +88,13 @@ export const CanvasComponent: React.FC<CanvasComponentProps> = (props: CanvasCom
   const computeFunction = (point: Point): Point => {
     return props.orderValue === 3
       ? point.multiply(point).multiply(point).add(new Point(props.constValue, 0.0))
-      : point;
+        : point.multiply(point).multiply(point).multiply(point).add(new Point(props.constValue, 0.0));
   }
 
   const computeFunctionDerivative = (point: Point): Point => {
     return props.orderValue === 3
       ? new Point(3, 0).multiply(point).multiply(point)
-      : point;
+        : new Point(4, 0).multiply(point).multiply(point).multiply(point);
   }
 
   const getNextIteration = (point: Point): Point => {

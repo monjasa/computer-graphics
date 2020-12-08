@@ -1,9 +1,7 @@
+import 'bootstrap/dist/css/bootstrap.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import {CanvasComponent} from "./components/CanvasComponent";
+import App from "./App";
 
-ReactDOM.render(
-  <CanvasComponent height={800} width={800} constValue={-1} orderValue={4} hueValues={[10, 120, 280, 320]} />,
-  document.getElementById('root')
-);
+ReactDOM.render(<App />, document.getElementById('root'));

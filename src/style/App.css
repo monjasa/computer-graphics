@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.radioContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.kContainer {
+    margin: 5px;
+}

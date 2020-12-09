@@ -27,9 +27,14 @@ export const CanvasComponent: React.FC<CanvasComponentProps> = (props: CanvasCom
 
   const setup = (p5: p5Types, canvasParentRef: Element) => {
 
+    p5.noLoop();
+
     p5.colorMode(p5.HSL, 360, 100, 100, 1);
     p5.createCanvas(props.width, props.height).parent(canvasParentRef);
 
+  };
+
+  const draw = (p5: p5Types) => {
     let img = p5.createImage(props.width, props.height);
     img.loadPixels();
 
@@ -56,8 +61,8 @@ export const CanvasComponent: React.FC<CanvasComponentProps> = (props: CanvasCom
             pointColor = props.colors[0];
           } else {
             pointColor = currentPoint.y > 0
-              ? props.colors[1]
-              : props.colors[2];
+                ? props.colors[1]
+                : props.colors[2];
           }
         } else if (props.orderValue === 4) {
           if (Math.abs(currentPoint.x - 1) < epsilon)
@@ -81,9 +86,10 @@ export const CanvasComponent: React.FC<CanvasComponentProps> = (props: CanvasCom
     p5.image(img, 0, 0);
   };
 
-  const draw = (p5: p5Types) => {
-
-  }
+  const mouseClicked = (p5: p5Types) => {
+    p5.clear();
+    p5.redraw();
+  };
 
   const computeFunction = (point: Point): Point => {
     return props.orderValue === 3
@@ -101,6 +107,6 @@ export const CanvasComponent: React.FC<CanvasComponentProps> = (props: CanvasCom
     return point.subtract(computeFunction(point).divide(computeFunctionDerivative(point)));
   }
 
-  return <Sketch setup={setup} draw={draw} />;
+  return <Sketch setup={setup} draw={draw} mouseClicked={mouseClicked} />;
 };
 

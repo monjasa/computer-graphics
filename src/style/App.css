@@ -1,3 +1,6 @@
 .container {
-    background: aqua;
+    background: antiquewhite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

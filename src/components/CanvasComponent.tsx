@@ -1,140 +1,140 @@
-import React from "react";
 import Sketch from "react-p5";
 import p5Types from "p5";
 
 interface CanvasComponentProps {
-  width: number,
-  height: number,
-  constValue: number,
-  orderValue: number,
-  hueValues: number[]
+    width: number,
+    height: number,
+    constValue: number,
+    orderValue: number,
+    hueValues: number[]
 }
 
 export const CanvasComponent: React.FC<CanvasComponentProps> = (props: CanvasComponentProps) => {
 
-  const epsilon = 0.001;
+    const epsilon = 0.001;
 
-  function writeColor(p5: p5Types, img: p5Types.Image, color: p5Types.Color, x: number, y: number) {
-    const index = (x + y * img.width) * 4;
-    img.pixels[index] = p5.red(color);
-    img.pixels[index + 1] = p5.green(color);
-    img.pixels[index + 2] = p5.blue(color);
-    img.pixels[index + 3] = 255 * p5.alpha(color);
-  }
-
-  const setup = (p5: p5Types, canvasParentRef: Element) => {
-
-    p5.colorMode(p5.HSL, 360, 100, 100, 1);
-    p5.createCanvas(props.width, props.height).parent(canvasParentRef);
-
-    let img = p5.createImage(props.width, props.height);
-    img.loadPixels();
-
-    for (let x = 0; x < img.width; x++) {
-      for (let y = 0; y < img.height; y++) {
-
-        let initialPoint = new Point((x / img.width) * 4 - 2, (y / img.height) * 4 - 2);
-
-        let previousPoint = getNextIteration(initialPoint);
-        let currentPoint = getNextIteration(previousPoint);
-
-        let iteration = 0;
-
-        while (Math.abs(currentPoint.x - previousPoint.x) > epsilon * epsilon &&
-        iteration <= 500) {
-          previousPoint = currentPoint;
-          currentPoint = getNextIteration(currentPoint);
-          iteration++;
-        }
-
-        let pointColor = p5.color(0, 0, 0, 1);
-        let alpha = (iteration / 20) + 0.5;
-
-        if (props.orderValue === 3) {
-          if (Math.abs(currentPoint.x - 1) < epsilon) {
-            pointColor = p5.color(props.hueValues[0], 80, 40, alpha);
-          } else {
-            pointColor = currentPoint.y > 0
-                ? p5.color(props.hueValues[1], 80, 40, alpha)
-                : p5.color(props.hueValues[2], 80, 40, alpha);
-          }
-        } else if (props.orderValue === 4) {
-          if (Math.abs(currentPoint.x - 1) < epsilon)
-            pointColor = p5.color(props.hueValues[0], 80, 40, alpha);
-          else if (Math.abs(currentPoint.x + 1) < epsilon)
-            pointColor = p5.color(props.hueValues[1], 80, 40, alpha);
-          else if (Math.abs(currentPoint.y - 1) < epsilon)
-            pointColor = p5.color(props.hueValues[2], 80, 40, alpha);
-          else if (Math.abs(currentPoint.y + 1) < epsilon)
-            pointColor = p5.color(props.hueValues[3], 80, 40, alpha);
-        }
-
-        writeColor(p5, img, pointColor, x, y);
-      }
+    function writeColor(p5: p5Types, img: p5Types.Image, color: p5Types.Color, x: number, y: number) {
+        const index = (x + y * img.width) * 4;
+        img.pixels[index] = p5.red(color);
+        img.pixels[index + 1] = p5.green(color);
+        img.pixels[index + 2] = p5.blue(color);
+        img.pixels[index + 3] = 255 * p5.alpha(color);
     }
 
-    img.updatePixels();
-    p5.image(img, 0, 0);
-  };
+    const setup = (p5: p5Types, canvasParentRef: Element) => {
 
-  const draw = (p5: p5Types) => {
+        p5.noLoop();
 
-  }
+        p5.colorMode(p5.HSL, 360, 100, 100, 1);
+        p5.createCanvas(props.width, props.height).parent(canvasParentRef);
+    };
 
-  const mouseClicked = (p5: p5Types) => {
-    // p5.saveCanvas("out.png");
-  };
+    const draw = (p5: p5Types) => {
+        let img = p5.createImage(props.width, props.height);
+        img.loadPixels();
 
-  const computeFunction = (point: Point): Point => {
-    return props.orderValue === 3
-        ? point.multiply(point).multiply(point).add(new Point(props.constValue, 0.0))
-        : point.multiply(point).multiply(point).multiply(point).add(new Point(props.constValue, 0.0));
-  }
+        for (let x = 0; x < img.width; x++) {
+            for (let y = 0; y < img.height; y++) {
 
-  const computeFunctionDerivative = (point: Point): Point => {
-    return props.orderValue === 3
-        ? new Point(3, 0).multiply(point).multiply(point)
-        : new Point(4, 0).multiply(point).multiply(point).multiply(point);
-  }
+                let initialPoint = new Point((x / img.width) * 4 - 2, (y / img.height) * 4 - 2);
 
-  const getNextIteration = (point: Point): Point => {
-    return point.subtract(computeFunction(point).divide(computeFunctionDerivative(point)));
-  }
+                let previousPoint = getNextIteration(initialPoint);
+                let currentPoint = getNextIteration(previousPoint);
 
-  return <Sketch setup={setup} draw={draw} mouseClicked={mouseClicked}/>;
+                let iteration = 0;
+
+                while (Math.abs(currentPoint.x - previousPoint.x) > epsilon * epsilon && iteration <= 500) {
+                    previousPoint = currentPoint;
+                    currentPoint = getNextIteration(currentPoint);
+                    iteration++;
+                }
+
+                let pointColor = p5.color(0, 0, 0, 1);
+                let alpha = (iteration / 20) + 0.5;
+
+                if (props.orderValue === 3) {
+                    if (Math.abs(currentPoint.x - 1) < epsilon) {
+                        pointColor = p5.color(props.hueValues[0], 80, 40, alpha);
+                    } else {
+                        pointColor = currentPoint.y > 0
+                            ? p5.color(props.hueValues[1], 80, 40, alpha)
+                            : p5.color(props.hueValues[2], 80, 40, alpha);
+                    }
+                } else if (props.orderValue === 4) {
+                    if (Math.abs(currentPoint.x - 1) < epsilon)
+                        pointColor = p5.color(props.hueValues[0], 80, 40, alpha);
+                    else if (Math.abs(currentPoint.x + 1) < epsilon)
+                        pointColor = p5.color(props.hueValues[1], 80, 40, alpha);
+                    else if (Math.abs(currentPoint.y - 1) < epsilon)
+                        pointColor = p5.color(props.hueValues[2], 80, 40, alpha);
+                    else if (Math.abs(currentPoint.y + 1) < epsilon)
+                        pointColor = p5.color(props.hueValues[3], 80, 40, alpha);
+                }
+
+                writeColor(p5, img, pointColor, x, y);
+            }
+        }
+
+        img.updatePixels();
+        p5.image(img, 0, 0);
+    };
+
+    const mouseClicked = (p5: p5Types) => {
+        // p5.saveCanvas("out.png");
+        p5.clear();
+        p5.redraw();
+    };
+
+    const computeFunction = (point: Point): Point => {
+        return props.orderValue === 3
+            ? point.multiply(point).multiply(point).add(new Point(props.constValue, 0.0))
+            : point.multiply(point).multiply(point).multiply(point).add(new Point(props.constValue, 0.0));
+    }
+
+    const computeFunctionDerivative = (point: Point): Point => {
+        return props.orderValue === 3
+            ? new Point(3, 0).multiply(point).multiply(point)
+            : new Point(4, 0).multiply(point).multiply(point).multiply(point);
+    }
+
+    const getNextIteration = (point: Point): Point => {
+        return point.subtract(computeFunction(point).divide(computeFunctionDerivative(point)));
+    }
+
+    return <Sketch setup={setup} draw={draw} mouseClicked={mouseClicked}/>;
 };
 
 class Point {
 
-  x: number;
-  y: number;
+    x: number;
+    y: number;
 
-  constructor(x: number, y: number) {
-    this.x = x;
-    this.y = y;
-  }
+    constructor(x: number, y: number) {
+        this.x = x;
+        this.y = y;
+    }
 
-  add(point: Point): Point {
-    return new Point(this.x + point.x, this.y + point.y);
-  }
+    add(point: Point): Point {
+        return new Point(this.x + point.x, this.y + point.y);
+    }
 
-  subtract(point: Point): Point {
-    return new Point(this.x - point.x, this.y - point.y);
-  }
+    subtract(point: Point): Point {
+        return new Point(this.x - point.x, this.y - point.y);
+    }
 
-  multiply(point: Point): Point {
-    return new Point(
-      this.x * point.x - this.y * point.y,
-      this.y * point.x + this.x * point.y
-    );
-  }
+    multiply(point: Point): Point {
+        return new Point(
+            this.x * point.x - this.y * point.y,
+            this.y * point.x + this.x * point.y
+        );
+    }
 
-  divide(point: Point): Point {
-    const denominator = point.x * point.x + point.y * point.y;
-    return new Point(
-      (this.x * point.x + this.y * point.y) / denominator,
-      (this.y * point.x - this.x * point.y) / denominator
-    );
-  }
+    divide(point: Point): Point {
+        const denominator = point.x * point.x + point.y * point.y;
+        return new Point(
+            (this.x * point.x + this.y * point.y) / denominator,
+            (this.y * point.x - this.x * point.y) / denominator
+        );
+    }
 }
 

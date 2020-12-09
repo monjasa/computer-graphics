@@ -1,17 +1,22 @@
-import React from "react";
+interface RadioButtonsComponentProps {
+    callbackFunc: (k: number) => void;
+}
 
-export const RadioButtons: React.FC = () => {
+export const RadioButtons: React.FC<RadioButtonsComponentProps> = (props: RadioButtonsComponentProps) => {
+
+    const changeK = (newK: number) => props.callbackFunc(newK);
+
     return (
         <div>
-            <div className="form-check">
-                <input className="form-check-input" type="radio" name="orderValue" id="radioBtn3" checked/>
-                <label className="form-check-label" htmlFor="radioBtn3">3</label>
-            </div>
+            <p>Choose k</p>
 
-            <div className="form-check">
-                <input className="form-check-input" type="radio" name="orderValue" id="radioBtn4" />
-                <label className="form-check-label" htmlFor="radioBtn4">4</label>
-            </div>
+            <label className="radio-inline"><input onClick={() => changeK(3)}  type="radio" name="k" defaultChecked/>
+                3
+            </label>
+
+            <label className="radio-inline"><input onClick={() => changeK(4)}  type="radio" name="k"/>
+                4
+            </label>
         </div>
     );
 }

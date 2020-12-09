@@ -44,10 +44,13 @@ export const CanvasComponent: React.FC<CanvasComponentProps> = (props: CanvasCom
     p5.colorMode(p5.HSL, 360, 100, 100, 1);
     p5.createCanvas(props.width, props.height).parent(canvasParentRef);
 
+    let fractalLabel = p5.createElement('h4', 'f(z) = z^k + c');
+    fractalLabel.position(20, 50);
+
     let kLabel = p5.createElement('p', 'Choose k');
-    kLabel.position(20, 20);
+    kLabel.position(20, 100);
     let kRadio = p5.createRadio();
-    kRadio.position(20, 40);
+    kRadio.position(20, 120);
     createOption(kRadio, '3');
     createOption(kRadio, '4');
 
@@ -60,30 +63,31 @@ export const CanvasComponent: React.FC<CanvasComponentProps> = (props: CanvasCom
     });
 
     let cLabel = p5.createElement('p', 'Choose color');
-    cLabel.position(20, 100);
-    let cRadio = p5.createRadio();
-    cRadio.position(20, 120);
+    cLabel.position(20, 150);
+    let cSelect = p5.createSelect();
+    cSelect.position(20, 170);
 
-    createOption(cRadio, 'colors 1');
-    createOption(cRadio, 'colors 2');
-    createOption(cRadio, 'colors 3');
+    createOption(cSelect, 'colors 1');
+    createOption(cSelect, 'colors 2');
+    createOption(cSelect, 'colors 3');
 
-    cRadio.mouseClicked(() => {
-      if (cRadio.value() === 'colors 1') {
+    // @ts-ignore
+    cSelect.changed(() => {
+      if (cSelect.value() === 'colors 1') {
         setColors([
           new Color(240, 75, 40),
           new Color(190, 75, 40),
           new Color(120, 75, 40),
           new Color(60, 75, 40)
         ]);
-      } else if (cRadio.value() === 'colors 2') {
+      } else if (cSelect.value() === 'colors 2') {
         setColors([
           new Color(51, 88, 40),
           new Color(182, 78, 40),
           new Color(319, 98, 40),
           new Color(88, 98, 40)
         ]);
-      } else if (cRadio.value() === 'colors 3') {
+      } else if (cSelect.value() === 'colors 3') {
         setColors([
           new Color(107, 98, 40),
           new Color(241, 100, 40),
@@ -95,6 +99,12 @@ export const CanvasComponent: React.FC<CanvasComponentProps> = (props: CanvasCom
       p5.clear();
       p5.redraw();
     });
+
+    let saveButton = p5.createButton('Save Fractal');
+    saveButton.position(1140, 80);
+    saveButton.mouseClicked(() => {
+      p5.saveCanvas('newtonFractal.png');
+    })
   };
 
   const mouseClicked = (p5: p5Types) => {

@@ -15,7 +15,6 @@ export const RadioButtons: React.FC<RadioButtonsComponentProps> = (props: RadioB
                 <label className="radio-inline"><input onClick={() => changeK(3)} type="radio" name="k" defaultChecked/>
                     3
                 </label>
-
                 <label className="radio-inline"><input onClick={() => changeK(4)} type="radio" name="k"/>
                     4
                 </label>

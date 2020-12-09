@@ -4,7 +4,7 @@ export const RadioButtons: React.FC = () => {
     return (
         <div>
             <div className="form-check">
-                <input className="form-check-input" type="radio" name="orderValue" id="radioBtn3" checked/>
+                <input className="form-check-input" type="radio" name="orderValue" id="radioBtn3" defaultChecked />
                 <label className="form-check-label" htmlFor="radioBtn3">3</label>
             </div>
 

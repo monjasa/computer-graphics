@@ -11,9 +11,13 @@
     "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
     "@types/react-router-dom": "^5.1.6",
+    "konva": "^7.2.2",
     "mdbreact": "^5.0.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-konva": "^17.0.1-0",
+    "react-native-get-pixel": "^0.0.5",
+    "react-native-get-pixel-color": "^1.1.0-alpha.23",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "typescript": "^4.0.3",
@@ -47,6 +51,7 @@
     "@types/bootstrap": "^5.0.1",
     "@types/react-bootstrap": "^0.32.25",
     "bootstrap": "^4.5.3",
-    "react-bootstrap": "^1.4.0"
+    "react-bootstrap": "^1.4.0",
+    "use-image": "^1.0.7"
   }
 }

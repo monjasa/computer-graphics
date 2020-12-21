@@ -7219,6 +7219,11 @@ kleur@^3.0.3:
   resolved "https://registry.yarnpkg.com/kleur/-/kleur-3.0.3.tgz#a79c9ecc86ee1ce3fa6206d1216c501f147fc07e"
   integrity sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==
 
+konva@^7.2.2:
+  version "7.2.2"
+  resolved "https://registry.yarnpkg.com/konva/-/konva-7.2.2.tgz#e46598850d864b0dca68c82013f1e436b1eef55d"
+  integrity sha512-3vtCLFV8S9ooMEC/ELMoHJLWK3YtVUIx44FZFdM1FUBZi88qF4ctdzeII5hfT9Lx6ulVlhC0a6cRdP0uRWjMmw==
+
 language-subtag-registry@~0.3.2:
   version "0.3.21"
   resolved "https://registry.yarnpkg.com/language-subtag-registry/-/language-subtag-registry-0.3.21.tgz#04ac218bea46f04cb039084602c6da9e788dd45a"
@@ -9578,6 +9583,14 @@ react-is@^17.0.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.1.tgz#5b3531bd76a645a4c9fb6e693ed36419e3301339"
   integrity sha512-NAnt2iGDXohE5LI7uBnLnqvLQMtzhkiAOLXTmv+qnF9Ky7xAPcX8Up/xWIhxvLVGJvuLiNc4xQLtuqDRzb4fSA==
 
+react-konva@^17.0.1-0:
+  version "17.0.1-0"
+  resolved "https://registry.yarnpkg.com/react-konva/-/react-konva-17.0.1-0.tgz#8877fe939bbe0c15a72783049d32d2f374b43b16"
+  integrity sha512-ECCc8cDxu9NAzdmCgEeNv2x4SFV8PHu07NR9W462COtv/tw7hHgpa42JzjAuGuKTcWg/muEkPLnOfAZYgK1ufQ==
+  dependencies:
+    react-reconciler "~0.26.1"
+    scheduler "^0.20.1"
+
 react-lifecycles-compat@^3.0.0, react-lifecycles-compat@^3.0.2, react-lifecycles-compat@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
@@ -9592,6 +9605,16 @@ react-modal@^3.8.1:
     prop-types "^15.5.10"
     react-lifecycles-compat "^3.0.0"
     warning "^4.0.3"
+
+react-native-get-pixel-color@^1.1.0-alpha.23:
+  version "1.1.0-alpha.23"
+  resolved "https://registry.yarnpkg.com/react-native-get-pixel-color/-/react-native-get-pixel-color-1.1.0-alpha.23.tgz#beeaa34ed64d0fa75e96fd84bbca5cea2cd873bf"
+  integrity sha512-f1UNKy0oKwu4rYmJmMq/ocO7OIL+O+ZLWec2FZY1SW7lEisSc+EbB6CvoV9aTqiq/WleZTqrDm6YAG+HBYHfGw==
+
+react-native-get-pixel@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/react-native-get-pixel/-/react-native-get-pixel-0.0.5.tgz#f073835feb57b3dc2152b3ae572d9ab0c0e83df2"
+  integrity sha512-JFJtkSLweCHD/BiJHnUSYCAVUzeJwoFBandOD77UkJAdNuCOaRU/6BgmGXuz6ufgn+wgkk1UGI3hyzAFFQuezQ==
 
 react-numeric-input@2.2.3:
   version "2.2.3"
@@ -9624,6 +9647,15 @@ react-popper@^1.3.7:
     prop-types "^15.6.1"
     typed-styles "^0.0.7"
     warning "^4.0.2"
+
+react-reconciler@~0.26.1:
+  version "0.26.1"
+  resolved "https://registry.yarnpkg.com/react-reconciler/-/react-reconciler-0.26.1.tgz#860952dd359fd870f94895c254271e3a9de3b2d6"
+  integrity sha512-6E/CvH9zcDmHjhiNJlP0qJ8+3ufnY2b5RWs774Uy8XKWN0l6qfnlkz0XnDacxqj2rbJdq76w9dlFXjPPOQrmqA==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    scheduler "^0.20.1"
 
 react-refresh@^0.8.3:
   version "0.8.3"
@@ -11566,6 +11598,11 @@ url@^0.11.0:
   dependencies:
     punycode "1.3.2"
     querystring "0.2.0"
+
+use-image@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/use-image/-/use-image-1.0.7.tgz#b2c42b78d32868762a37631673eb169a244d5ad1"
+  integrity sha512-Z8hB8+lAGe25iqO3YaHO7bSvBSGErEakYQ6RGyRrPZoMDLKBIuZ67ikzn8f5ydjWorqFzeX+U3vVwnXoE1Q56Q==
 
 use@^3.1.0:
   version "3.1.1"

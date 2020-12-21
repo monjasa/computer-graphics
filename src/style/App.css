@@ -12,3 +12,7 @@
 .kContainer {
   margin: 5px;
 }
+
+.active {
+  font-weight: 500;
+}

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import useImage from "use-image";
 import {Image, Layer, Stage} from 'react-konva';
 import Konva from "konva";
@@ -16,6 +16,10 @@ const ColorsCanvasComponent: React.FC<ColorSchemeProps> = (props: ColorSchemePro
   const [imageNode, setImageNode] = useState<Konva.Image>();
   const [pointRGBColor, setPointRGBColor] = useState<Color>(new Color(0, 0, 0));
   const [pointHSLColor, setPointHSLColor] = useState<Color>(new Color(0, 0, 0));
+  const [hue, setHue] = useState<number>(0);
+  const [lightness, setLightness] = useState<number>(0);
+  const [saturation , setSaturation ] = useState<number>(0);
+
 
   const convertRGBtoHSL = (r: number, g: number, b: number): [number, number, number] => {
 
@@ -115,6 +119,19 @@ const ColorsCanvasComponent: React.FC<ColorSchemeProps> = (props: ColorSchemePro
     return [r, g, b];
   }
 
+  useEffect(() => {
+    imageNode?.cache();
+  }, [image]);
+
+  useEffect(() => {
+    imageNode?.cache();
+    imageNode?.filters([Konva.Filters.HSL]);
+    imageNode?.hue(hue);
+    imageNode?.saturation (saturation);
+    imageNode?.luminance(lightness);
+    imageNode?.getLayer()?.batchDraw();
+  }, [hue, saturation, lightness]);
+
   const handleMouseMove = () => {
 
     const x = imageNode?.getStage()?.getPointerPosition()?.x as number;
@@ -191,6 +208,17 @@ const ColorsCanvasComponent: React.FC<ColorSchemeProps> = (props: ColorSchemePro
           </div>
         </div>
       </div>
+      <label htmlFor="hue-range">Hue</label>
+      <input type="range" min="0" max="360" step="1" id="hue-range" className={"custom-range"}
+             onChange={event => setHue(Number.parseFloat(event.target.value))}/>
+
+      <label htmlFor="saturation-range">Saturation</label>
+      <input type="range" min="0" max="1" step="0.05" id="saturation-range" className={"custom-range"}
+             onChange={event => setSaturation(Number.parseFloat(event.target.value))}/>
+
+      <label htmlFor="lightness-range">Lightness</label>
+      <input type="range" min="0" max="1" step="0.05" id="lightness-range" className={"custom-range"}
+             onChange={event => setLightness(Number.parseFloat(event.target.value))}/>
     </div>
   );
 };

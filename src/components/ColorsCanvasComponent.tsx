@@ -1,15 +1,13 @@
 import React, {useState} from "react";
-
 import useImage from "use-image";
-
 import {Image, Layer, Stage} from 'react-konva';
-
 import Konva from "konva";
 import Color from "../utils/Color";
-import {mkdtemp} from "fs";
 
 interface ColorSchemeProps {
-  imageSource: string
+  imageSource: string,
+  imgHeight: number,
+  imgWidth: number
 }
 
 const ColorsCanvasComponent: React.FC<ColorSchemeProps> = (props: ColorSchemeProps) => {
@@ -33,17 +31,17 @@ const ColorsCanvasComponent: React.FC<ColorSchemeProps> = (props: ColorSchemePro
     let s = 0;
     let h = 0;
 
-    if (l != 0 && max != min) {
+    if (l !== 0 && max !== min) {
       if (l <= 0.5)
         s = (max - min) / (max + min);
       else
         s = (max - min) / (2 - max - min);
 
-      if (max == r && g >= b)
+      if (max === r && g >= b)
         h = ((g - b) / (max - min)) * 60;
-      else if (max == r && g < b)
+      else if (max === r && g < b)
         h = ((g - b) / (max - min)) * 60 + 360;
-      else if (max == g)
+      else if (max === g)
         h = ((b - r) / (max - min)) * 60 + 120
       else
         h = ((r - g) / (max - min)) * 60 + 240;
@@ -78,7 +76,7 @@ const ColorsCanvasComponent: React.FC<ColorSchemeProps> = (props: ColorSchemePro
     s /= 100;
     l /= 100;
 
-    if (h == 0 && s == 0) {
+    if (h === 0 && s === 0) {
       const val = l * 255;
       return [val, val, val];
     }
@@ -90,7 +88,7 @@ const ColorsCanvasComponent: React.FC<ColorSchemeProps> = (props: ColorSchemePro
     else
       temp_1 = l + s - l * s;
 
-    temp_2 = 2 * l -temp_1;
+    temp_2 = 2 * l - temp_1;
 
     h /= 360;
 
@@ -136,11 +134,13 @@ const ColorsCanvasComponent: React.FC<ColorSchemeProps> = (props: ColorSchemePro
 
   return (
     <div>
-      <Stage width={684} height={500}>
+      <Stage width={props.imgWidth} height={props.imgHeight}>
         <Layer>
           <Image
             image={image}
             ref={node => setImageNode(node as Konva.Image)}
+            width={props.imgWidth}
+            height={props.imgHeight}
             onMouseMove={handleMouseMove}
           />
         </Layer>
@@ -149,19 +149,22 @@ const ColorsCanvasComponent: React.FC<ColorSchemeProps> = (props: ColorSchemePro
         <div className="col text-left">
           <div className="form-group">
             <label>Red</label>
-            <input type="number" className="form-control" value={pointRGBColor?.firstComponent} placeholder="0" readOnly />
+            <input type="number" className="form-control" value={pointRGBColor?.firstComponent} placeholder="0"
+                   readOnly/>
           </div>
         </div>
         <div className="col text-left">
           <div className="form-group">
             <label>Green</label>
-            <input type="number" className="form-control" value={pointRGBColor?.secondComponent} placeholder="0" readOnly />
+            <input type="number" className="form-control" value={pointRGBColor?.secondComponent} placeholder="0"
+                   readOnly/>
           </div>
         </div>
         <div className="col text-left">
           <div className="form-group">
             <label>Blue</label>
-            <input type="number" className="form-control" value={pointRGBColor?.thirdComponent} placeholder="0" readOnly />
+            <input type="number" className="form-control" value={pointRGBColor?.thirdComponent} placeholder="0"
+                   readOnly/>
           </div>
         </div>
       </div>
@@ -169,19 +172,22 @@ const ColorsCanvasComponent: React.FC<ColorSchemeProps> = (props: ColorSchemePro
         <div className="col text-left">
           <div className="form-group">
             <label>H</label>
-            <input type="number" className="form-control" value={pointHSLColor?.firstComponent} placeholder="0" readOnly />
+            <input type="number" className="form-control" value={pointHSLColor?.firstComponent} placeholder="0"
+                   readOnly/>
           </div>
         </div>
         <div className="col text-left">
           <div className="form-group">
             <label>S</label>
-            <input type="number" className="form-control" value={pointHSLColor?.secondComponent} placeholder="0" readOnly />
+            <input type="number" className="form-control" value={pointHSLColor?.secondComponent} placeholder="0"
+                   readOnly/>
           </div>
         </div>
         <div className="col text-left">
           <div className="form-group">
             <label>L</label>
-            <input type="number" className="form-control" value={pointHSLColor?.thirdComponent} placeholder="0" readOnly />
+            <input type="number" className="form-control" value={pointHSLColor?.thirdComponent} placeholder="0"
+                   readOnly/>
           </div>
         </div>
       </div>

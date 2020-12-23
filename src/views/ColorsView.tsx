@@ -1,15 +1,24 @@
 import React, {useState} from "react";
 import {MDBContainer} from "mdbreact";
 import ColorsCanvasComponent from "../components/ColorsCanvasComponent";
-import {Button} from "react-bootstrap";
 
 const ColorsView: React.FC = () => {
 
   const [canvasKey, setCanvasKey] = useState(1);
   const [imageSrc, setImageSrc] = useState("./fire.jpg");
+  const [imgSize, setImgSize] = useState([684, 500])
 
-  const handleImageUpload = () => {
-    setImageSrc('./mountains.jpg');
+  const handleImageUpload = (e) => {
+
+    const filePath = `./${e.target.files[0].name}`;
+
+    const img = new Image();
+    img.src = filePath;
+    img.onload = () => {
+      const coef = 684 / img.width;
+      setImgSize(([coef * img.width, coef * img.height]));
+    }
+    setImageSrc(filePath);
     setCanvasKey(canvasKey + 1);
   }
 
@@ -17,10 +26,10 @@ const ColorsView: React.FC = () => {
     <section className="m-5">
       <h1 className="text-center">Color Schemes</h1>
       <div className="container col-4">
-        <Button className="mt-4 text-center" onClick={handleImageUpload} variant="elegant" block>Upload Image</Button>
+        <input className="mt-4 text-center form-white form-outline" type="file" onChange={handleImageUpload}/>
       </div>
       <MDBContainer className="text-center mt-4">
-        <ColorsCanvasComponent key={canvasKey} imageSource={imageSrc} />
+        <ColorsCanvasComponent key={canvasKey} imageSource={imageSrc} imgWidth={imgSize[0]} imgHeight={imgSize[1]}/>
       </MDBContainer>
     </section>
   );

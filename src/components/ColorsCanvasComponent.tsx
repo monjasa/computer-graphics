@@ -6,6 +6,7 @@ import {Image, Layer, Stage} from 'react-konva';
 
 import Konva from "konva";
 import Color from "../utils/Color";
+import {mkdtemp} from "fs";
 
 interface ColorSchemeProps {
   imageSource: string
@@ -15,10 +16,108 @@ const ColorsCanvasComponent: React.FC<ColorSchemeProps> = (props: ColorSchemePro
 
   const [image] = useImage(props.imageSource);
   const [imageNode, setImageNode] = useState<Konva.Image>();
-  const [pointColor, setPointColor] = useState<Color>();
+  const [pointRGBColor, setPointRGBColor] = useState<Color>(new Color(0, 0, 0));
+  const [pointHSLColor, setPointHSLColor] = useState<Color>(new Color(0, 0, 0));
+
+  const convertRGBtoHSL = (r: number, g: number, b: number): [number, number, number] => {
+
+    r /= 255;
+    g /= 255;
+    b /= 255;
+
+    const min = Math.min(r, g, b);
+    const max = Math.max(r, g, b);
+
+    let l = (min + max) / 2;
+
+    let s = 0;
+    let h = 0;
+
+    if (l != 0 && max != min) {
+      if (l <= 0.5)
+        s = (max - min) / (max + min);
+      else
+        s = (max - min) / (2 - max - min);
+
+      if (max == r && g >= b)
+        h = ((g - b) / (max - min)) * 60;
+      else if (max == r && g < b)
+        h = ((g - b) / (max - min)) * 60 + 360;
+      else if (max == g)
+        h = ((b - r) / (max - min)) * 60 + 120
+      else
+        h = ((r - g) / (max - min)) * 60 + 240;
+    }
+
+    s *= 100;
+    l *= 100;
+    h = Number.parseInt(h.toFixed());
+    s = Number.parseFloat(s.toFixed(2));
+    l = Number.parseFloat(l.toFixed(2));
+
+    return [h, s, l];
+  }
+
+  const convertHSLtoRGB = (h: number, s: number, l: number): [number, number, number] => {
+
+    const findValue = (color: number): number => {
+      if (6 * color < 1)
+        return temp_2 + (temp_1 - temp_2) * 6 * color;
+      else {
+        if (2 * color < 1)
+          return temp_1;
+        else {
+          if (3 * color < 2)
+            return temp_2 + (temp_1 - temp_2) * (0.666 - color) * 6;
+          else
+            return temp_2;
+        }
+      }
+    }
+
+    s /= 100;
+    l /= 100;
+
+    if (h == 0 && s == 0) {
+      const val = l * 255;
+      return [val, val, val];
+    }
+
+    let temp_1: number, temp_2: number;
+
+    if (l <= 0.5)
+      temp_1 = l * (1 + s);
+    else
+      temp_1 = l + s - l * s;
+
+    temp_2 = 2 * l -temp_1;
+
+    h /= 360;
+
+    let temp_R = h + 0.333;
+    let temp_G = h;
+    let temp_B = h - 0.333;
+
+    temp_R = temp_R < 0 ? temp_R + 1 : temp_R;
+    temp_G = temp_G < 0 ? temp_G + 1 : temp_G;
+    temp_B = temp_B < 0 ? temp_B + 1 : temp_B;
+
+    temp_R = temp_R > 1 ? temp_R - 1 : temp_R;
+    temp_G = temp_G > 1 ? temp_G - 1 : temp_G;
+    temp_B = temp_B > 1 ? temp_B - 1 : temp_B;
+
+    let r = findValue(temp_R);
+    let g = findValue(temp_G);
+    let b = findValue(temp_B);
+
+    r = Number.parseInt((r * 255).toFixed());
+    g = Number.parseInt((g * 255).toFixed());
+    b = Number.parseInt((b * 255).toFixed());
+
+    return [r, g, b];
+  }
 
   const handleMouseMove = () => {
-
 
     const x = imageNode?.getStage()?.getPointerPosition()?.x as number;
     const y = imageNode?.getStage()?.getPointerPosition()?.y as number;
@@ -29,7 +128,10 @@ const ColorsCanvasComponent: React.FC<ColorSchemeProps> = (props: ColorSchemePro
     let green = context.getImageData(x, y, 1, 1).data[1];
     let blue = context.getImageData(x, y, 1, 1).data[2];
 
-    setPointColor(new Color(red, green, blue));
+    setPointRGBColor(new Color(red, green, blue));
+
+    const [h, s, l] = convertRGBtoHSL(red, green, blue)
+    setPointHSLColor(new Color(h, s, l));
   }
 
   return (
@@ -47,19 +149,39 @@ const ColorsCanvasComponent: React.FC<ColorSchemeProps> = (props: ColorSchemePro
         <div className="col text-left">
           <div className="form-group">
             <label>Red</label>
-            <input type="number" className="form-control" value={pointColor?.firstComponent} placeholder="0" readOnly />
+            <input type="number" className="form-control" value={pointRGBColor?.firstComponent} placeholder="0" readOnly />
           </div>
         </div>
         <div className="col text-left">
           <div className="form-group">
             <label>Green</label>
-            <input type="number" className="form-control" value={pointColor?.secondComponent} placeholder="0" readOnly />
+            <input type="number" className="form-control" value={pointRGBColor?.secondComponent} placeholder="0" readOnly />
           </div>
         </div>
         <div className="col text-left">
           <div className="form-group">
             <label>Blue</label>
-            <input type="number" className="form-control" value={pointColor?.thirdComponent} placeholder="0" readOnly />
+            <input type="number" className="form-control" value={pointRGBColor?.thirdComponent} placeholder="0" readOnly />
+          </div>
+        </div>
+      </div>
+      <div className="row mt-3">
+        <div className="col text-left">
+          <div className="form-group">
+            <label>H</label>
+            <input type="number" className="form-control" value={pointHSLColor?.firstComponent} placeholder="0" readOnly />
+          </div>
+        </div>
+        <div className="col text-left">
+          <div className="form-group">
+            <label>S</label>
+            <input type="number" className="form-control" value={pointHSLColor?.secondComponent} placeholder="0" readOnly />
+          </div>
+        </div>
+        <div className="col text-left">
+          <div className="form-group">
+            <label>L</label>
+            <input type="number" className="form-control" value={pointHSLColor?.thirdComponent} placeholder="0" readOnly />
           </div>
         </div>
       </div>

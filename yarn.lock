@@ -9606,16 +9606,6 @@ react-modal@^3.8.1:
     react-lifecycles-compat "^3.0.0"
     warning "^4.0.3"
 
-react-native-get-pixel-color@^1.1.0-alpha.23:
-  version "1.1.0-alpha.23"
-  resolved "https://registry.yarnpkg.com/react-native-get-pixel-color/-/react-native-get-pixel-color-1.1.0-alpha.23.tgz#beeaa34ed64d0fa75e96fd84bbca5cea2cd873bf"
-  integrity sha512-f1UNKy0oKwu4rYmJmMq/ocO7OIL+O+ZLWec2FZY1SW7lEisSc+EbB6CvoV9aTqiq/WleZTqrDm6YAG+HBYHfGw==
-
-react-native-get-pixel@^0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/react-native-get-pixel/-/react-native-get-pixel-0.0.5.tgz#f073835feb57b3dc2152b3ae572d9ab0c0e83df2"
-  integrity sha512-JFJtkSLweCHD/BiJHnUSYCAVUzeJwoFBandOD77UkJAdNuCOaRU/6BgmGXuz6ufgn+wgkk1UGI3hyzAFFQuezQ==
-
 react-numeric-input@2.2.3:
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/react-numeric-input/-/react-numeric-input-2.2.3.tgz#4bf5918c3eafed851a80df1eb992d941002bb552"

@@ -1,13 +1,13 @@
 class Color {
 
-  hue: number;
-  saturation: number;
-  lightness: number;
+  firstComponent: number;
+  secondComponent: number;
+  thirdComponent: number;
 
-  constructor(hue: number, saturation: number, lightness: number) {
-    this.hue = hue;
-    this.saturation = saturation;
-    this.lightness = lightness;
+  constructor(firstComponent: number, secondComponent: number, thirdComponent: number) {
+    this.firstComponent = firstComponent;
+    this.secondComponent = secondComponent;
+    this.thirdComponent = thirdComponent;
   }
 }
 

@@ -1,4 +1,4 @@
-import React, {MutableRefObject, useEffect, useRef, useState} from 'react';
+import React, {MutableRefObject, useEffect, useImperativeHandle, useRef, useState} from 'react';
 import Point from "../utils/Point";
 
 interface CanvasProps {
@@ -20,6 +20,20 @@ const FractalCanvasComponent: React.FC<CanvasProps> = (props: CanvasProps) => {
 
   const epsilon = 0.001;
 
+  const downloadURI = (uri, name) => {
+    let link = document.createElement('a');
+    link.download = name;
+    link.href = uri;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  const saveImage = () => {
+      let dataURL = canvasRef.current.toDataURL();
+      downloadURI(dataURL, 'fractal.png');
+    }
+
   useEffect(() => {
     const canvas = canvasRef.current;
 
@@ -38,9 +52,6 @@ const FractalCanvasComponent: React.FC<CanvasProps> = (props: CanvasProps) => {
   }, [props.orderValue])
 
   useEffect(() => {
-    console.log(abs);
-    console.log(xOffset);
-    console.log(yOffset);
     const context = contextRef.current;
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
 

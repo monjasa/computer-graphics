@@ -3,6 +3,7 @@ import useImage from "use-image";
 import {Image, Layer, Stage} from 'react-konva';
 import Konva from "konva";
 import Color from "../utils/Color";
+import {Button} from "react-bootstrap";
 
 interface ColorSchemeProps {
   imageSource: string,
@@ -18,8 +19,7 @@ const ColorsCanvasComponent: React.FC<ColorSchemeProps> = (props: ColorSchemePro
   const [pointHSLColor, setPointHSLColor] = useState<Color>(new Color(0, 0, 0));
   const [hue, setHue] = useState<number>(0);
   const [lightness, setLightness] = useState<number>(0);
-  const [saturation , setSaturation ] = useState<number>(0);
-
+  const [saturation, setSaturation] = useState<number>(0);
 
   const convertRGBtoHSL = (r: number, g: number, b: number): [number, number, number] => {
 
@@ -119,15 +119,26 @@ const ColorsCanvasComponent: React.FC<ColorSchemeProps> = (props: ColorSchemePro
     return [r, g, b];
   }
 
-  useEffect(() => {
-    imageNode?.cache();
-  }, [image]);
+  function downloadURI(uri, name) {
+    let link = document.createElement('a');
+    link.download = name;
+    link.href = uri;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  const saveImage = () => {
+    let dataURL = imageNode?.getStage()?.toDataURL({ pixelRatio: 3 });
+    downloadURI(dataURL, 'stage.png');
+  }
+
 
   useEffect(() => {
     imageNode?.cache();
     imageNode?.filters([Konva.Filters.HSL]);
     imageNode?.hue(hue);
-    imageNode?.saturation (saturation);
+    imageNode?.saturation(saturation);
     imageNode?.luminance(lightness);
     imageNode?.getLayer()?.batchDraw();
   }, [hue, saturation, lightness]);
@@ -209,16 +220,18 @@ const ColorsCanvasComponent: React.FC<ColorSchemeProps> = (props: ColorSchemePro
         </div>
       </div>
       <label htmlFor="hue-range">Hue</label>
-      <input type="range" min="0" max="360" step="1" id="hue-range" className={"custom-range"}
+      <input type="range" min="0" max="360" step="1" id="hue-range" className="custom-range"
              onChange={event => setHue(Number.parseFloat(event.target.value))}/>
 
       <label htmlFor="saturation-range">Saturation</label>
-      <input type="range" min="0" max="1" step="0.05" id="saturation-range" className={"custom-range"}
+      <input type="range" min="0" max="1" step="0.05" id="saturation-range" className="custom-range"
              onChange={event => setSaturation(Number.parseFloat(event.target.value))}/>
 
       <label htmlFor="lightness-range">Lightness</label>
-      <input type="range" min="0" max="1" step="0.05" id="lightness-range" className={"custom-range"}
+      <input type="range" min="0" max="1" step="0.05" id="lightness-range" className="custom-range"
              onChange={event => setLightness(Number.parseFloat(event.target.value))}/>
+
+      <Button className="mt-4 text-center" onClick={saveImage} variant="elegant" block>Save Image</Button>
     </div>
   );
 };

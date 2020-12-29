@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {MutableRefObject, useRef, useState} from "react";
 import {MDBBtn, MDBContainer} from "mdbreact";
 import FractalCanvasComponent from "../components/FractalCanvasComponent";
 
@@ -20,7 +20,7 @@ const FractalsView: React.FC = () => {
       <h1 className="text-center">Newton Fractals</h1>
 
       <MDBContainer className="text-center mt-5">
-        <FractalCanvasComponent height={800} width={800} constValue={-1} orderValue={k} hueValues={hueValues} />
+        <FractalCanvasComponent  height={800} width={800} constValue={-1} orderValue={k} hueValues={hueValues} />
 
         <MDBContainer className="ml-3 text-center">
           <div className="d-flex flex-column">

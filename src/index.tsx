@@ -12,6 +12,7 @@ import App from "./App";
 import FractalsView from "./views/FractalsView";
 import ColorsView from "./views/ColorsView";
 import MainView from "./views/MainView";
+import AffineTransformationsView from "./views/AffineTransformationsView";
 
 ReactDOM.render((
   <BrowserRouter>
@@ -20,6 +21,8 @@ ReactDOM.render((
       <Route exact path="/" component={MainView} />
       <Route path='/fractals' component={FractalsView} />
       <Route path='/colors' component={ColorsView} />
+      <Route path='/affine_transformations' component={AffineTransformationsView} />
+      <Route path='/reference' component={MainView} />
     </Switch>
   </BrowserRouter>
 ), document.getElementById('root'));

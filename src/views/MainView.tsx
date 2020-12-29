@@ -2,6 +2,9 @@ import React from "react";
 
 import fractalsCardImage from '../assets/images/fractals-card-image.jpg';
 import colorsCardImage from '../assets/images/colors-card-image.jpg';
+import affineCardImage from '../assets/images/affine-card-image.jpg';
+import referenceCardImage from '../assets/images/reference-card-image.jpg';
+
 
 import {MDBBtn, MDBCard, MDBCardBody, MDBCardGroup, MDBCardImage, MDBCardText, MDBCardTitle, MDBLink} from "mdbreact";
 
@@ -11,8 +14,8 @@ const MainView: React.FC = () => {
       <h1 className="text-center">Computer Graphics</h1>
 
       <MDBCardGroup className="mt-5 col-8 offset-2">
-        <MDBCard className="mx-4" style={{ width: "25rem" }}>
-          <MDBCardImage className="img-fluid" src={fractalsCardImage} waves />
+        <MDBCard className="mx-4" style={{width: "25rem"}}>
+          <MDBCardImage className="img-fluid" src={fractalsCardImage} waves/>
           <MDBCardBody>
             <MDBCardTitle>Newton Fractals</MDBCardTitle>
             <MDBCardText>
@@ -25,8 +28,8 @@ const MainView: React.FC = () => {
           </MDBCardBody>
         </MDBCard>
 
-        <MDBCard className="mx-4" style={{ width: "25rem" }}>
-          <MDBCardImage className="img-fluid" src={colorsCardImage} waves />
+        <MDBCard className="mx-4" style={{width: "25rem"}}>
+          <MDBCardImage className="img-fluid" src={colorsCardImage} waves/>
           <MDBCardBody>
             <MDBCardTitle>Colors Schemes</MDBCardTitle>
             <MDBCardText>
@@ -34,6 +37,36 @@ const MainView: React.FC = () => {
               Vestibulum semper metus non leo porta, non rutrum libero ultrices.
             </MDBCardText>
             <MDBLink to="/colors">
+              <MDBBtn color="elegant" block>Go</MDBBtn>
+            </MDBLink>
+          </MDBCardBody>
+        </MDBCard>
+      </MDBCardGroup>
+
+      <MDBCardGroup className="mt-5 col-8 offset-2">
+        <MDBCard className="mx-4" style={{width: "25rem"}}>
+          <MDBCardImage className="img-fluid" src={affineCardImage} waves/>
+          <MDBCardBody>
+            <MDBCardTitle>Affine transformation</MDBCardTitle>
+            <MDBCardText>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Vestibulum semper metus non leo porta, non rutrum libero ultrices.
+            </MDBCardText>
+            <MDBLink to="/affine_transformations">
+              <MDBBtn color="elegant" block>Go</MDBBtn>
+            </MDBLink>
+          </MDBCardBody>
+        </MDBCard>
+
+        <MDBCard className="mx-4" style={{width: "25rem"}}>
+          <MDBCardImage className="img-fluid" src={referenceCardImage} waves/>
+          <MDBCardBody>
+            <MDBCardTitle>Reference</MDBCardTitle>
+            <MDBCardText>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Vestibulum semper metus non leo porta, non rutrum libero ultrices.
+            </MDBCardText>
+            <MDBLink to="/reference">
               <MDBBtn color="elegant" block>Go</MDBBtn>
             </MDBLink>
           </MDBCardBody>

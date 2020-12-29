@@ -22,6 +22,12 @@ const App: React.FC = () => {
             <MDBNavItem>
               <MDBNavLink to="/colors">Colors</MDBNavLink>
             </MDBNavItem>
+            <MDBNavItem>
+              <MDBNavLink to="/affine_transformations">Affine Transformations</MDBNavLink>
+            </MDBNavItem>
+            <MDBNavItem>
+              <MDBNavLink to="/reference">Reference</MDBNavLink>
+            </MDBNavItem>
           </MDBNavbarNav>
         </MDBCollapse>
       </MDBNavbar>

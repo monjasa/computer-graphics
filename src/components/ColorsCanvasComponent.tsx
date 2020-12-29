@@ -3,6 +3,7 @@ import useImage from "use-image";
 import {Image, Layer, Stage} from 'react-konva';
 import Konva from "konva";
 import Color from "../utils/Color";
+import {MDBBtn} from "mdbreact";
 
 interface ColorSchemeProps {
   imageSource: string,
@@ -149,6 +150,20 @@ const ColorsCanvasComponent: React.FC<ColorSchemeProps> = (props: ColorSchemePro
     setPointHSLColor(new Color(h, s, l));
   }
 
+  function downloadURI(uri, name) {
+    let link = document.createElement('a');
+    link.download = name;
+    link.href = uri;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  const saveImage = () => {
+    let dataURL = imageNode?.getStage()?.toDataURL({ pixelRatio: 3 });
+    downloadURI(dataURL, 'color-scheme.png');
+  }
+
   return (
     <div>
       <Stage className="my-4" width={props.imgWidth} height={props.imgHeight}>
@@ -220,6 +235,8 @@ const ColorsCanvasComponent: React.FC<ColorSchemeProps> = (props: ColorSchemePro
         <label htmlFor="lightness-range">Lightness</label>
         <input type="range" min="0" max="1" step="0.05" id="lightness-range" className={"custom-range"}
                onChange={event => setLightness(Number.parseFloat(event.target.value))}/>
+
+        <MDBBtn color="elegant" block onClick={saveImage}>Save Image</MDBBtn>
       </div>
     </div>
   );

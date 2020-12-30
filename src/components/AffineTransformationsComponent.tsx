@@ -133,6 +133,37 @@ const AffineTransformationsComponent: React.FC<AffineProps> = (props: AffineProp
     }
   };
 
+  const RotationOrigins = {
+    center: {
+      id: RotationOrigin.Center,
+      name: `O(${x}, ${y})`
+    },
+    a: {
+      id: RotationOrigin.A,
+      name: `A(${x}, ${(y + radius / snapSize).toFixed(2)})`
+    },
+    b: {
+      id: RotationOrigin.B,
+      name: `B(${(x + radius / snapSize * Math.sqrt(3) / 2).toFixed(2)}, ${(y + radius / snapSize / 2).toFixed(2)})`
+    },
+    c: {
+      id: RotationOrigin.C,
+      name: `C(${(x + radius / snapSize * Math.sqrt(3) / 2).toFixed(2)}, ${(y - radius / snapSize / 2).toFixed(2)})`
+    },
+    d: {
+      id: RotationOrigin.D,
+      name: `D(${x}, ${y - radius})`
+    },
+    e: {
+      id: RotationOrigin.E,
+      name: `E(${(x - radius /snapSize * Math.sqrt(3) / 2).toFixed(2)}, ${(y - radius / snapSize/ 2).toFixed(2)})`
+    },
+    f: {
+      id: RotationOrigin.F,
+      name: `F(${(x - radius / snapSize * Math.sqrt(3) / 2).toFixed(2)}, ${(y + radius / snapSize / 2).toFixed(2)})`
+    }
+  };
+
 
   return (
     <div>
@@ -146,7 +177,7 @@ const AffineTransformationsComponent: React.FC<AffineProps> = (props: AffineProp
                   name={item.id()}
                   points={item.points()}
                   stroke={item.stroke()}
-                  strokeWidth={item.strokeWidth()} />
+                  strokeWidth={item.strokeWidth()}/>
               ))}
             </Layer>
             <Layer>
@@ -154,55 +185,57 @@ const AffineTransformationsComponent: React.FC<AffineProps> = (props: AffineProp
                 points={[props.width / 2, props.height, props.width / 2, 0]}
                 fill={'hsl(0, 0%, 15%)'}
                 stroke={'hsl(0, 0%, 15%)'}
-                strokeWidth={2} />
+                strokeWidth={2}/>
               <Arrow
                 points={[0, props.height / 2, props.width, props.height / 2]}
                 fill={'hsl(0, 0%, 15%)'}
                 stroke={'hsl(0, 0%, 15%)'}
-                strokeWidth={2} />
-              <Line points={[props.width / 2 + snapSize, props.height / 2 + 5, props.width / 2 + snapSize, props.height / 2 - 5]}
-                    fill={'hsl(0, 0%, 15%)'}
-                    stroke={'hsl(0, 0%, 15%)'}
-                    strokeWidth={2} />
-              <Line points={[props.width / 2 - 5, props.height / 2 - snapSize, props.width / 2 + 5, props.height / 2 - snapSize]}
-                    fill={'hsl(0, 0%, 15%)'}
-                    stroke={'hsl(0, 0%, 15%)'}
-                    strokeWidth={2} />
+                strokeWidth={2}/>
+              <Line
+                points={[props.width / 2 + snapSize, props.height / 2 + 5, props.width / 2 + snapSize, props.height / 2 - 5]}
+                fill={'hsl(0, 0%, 15%)'}
+                stroke={'hsl(0, 0%, 15%)'}
+                strokeWidth={2}/>
+              <Line
+                points={[props.width / 2 - 5, props.height / 2 - snapSize, props.width / 2 + 5, props.height / 2 - snapSize]}
+                fill={'hsl(0, 0%, 15%)'}
+                stroke={'hsl(0, 0%, 15%)'}
+                strokeWidth={2}/>
               <Text
                 x={props.width - 20}
                 y={props.height / 2 + 10}
                 text={'x'}
                 fontSize={16}
                 fontStyle={'bold'}
-                fill={'hsl(0, 0%, 15%)'} />
+                fill={'hsl(0, 0%, 15%)'}/>
               <Text
                 x={props.width / 2 - 20}
                 y={10}
                 text={'y'}
                 fontSize={16}
                 fontStyle={'bold'}
-                fill={'hsl(0, 0%, 15%)'} />
+                fill={'hsl(0, 0%, 15%)'}/>
               <Text
                 x={props.width / 2 - 20}
                 y={props.height / 2 + 10}
                 text={'0'}
                 fontSize={16}
                 fontStyle={'bold'}
-                fill={'hsl(0, 0%, 15%)'} />
+                fill={'hsl(0, 0%, 15%)'}/>
               <Text
                 x={props.width / 2 + snapSize - 20}
                 y={props.height / 2 + 20}
                 text={'1.0'}
                 fontSize={16}
                 fontStyle={'bold'}
-                fill={'hsl(0, 0%, 15%)'} />
+                fill={'hsl(0, 0%, 15%)'}/>
               <Text
                 x={props.width / 2 - 40}
                 y={props.height / 2 - snapSize}
                 text={'1.0'}
                 fontSize={16}
                 fontStyle={'bold'}
-                fill={'hsl(0, 0%, 15%)'} />
+                fill={'hsl(0, 0%, 15%)'}/>
             </Layer>
             <Layer>
               <RegularPolygon
@@ -211,7 +244,7 @@ const AffineTransformationsComponent: React.FC<AffineProps> = (props: AffineProp
                 y={translatePoint(hexagonPoint).y}
                 sides={6}
                 radius={radius}
-                fill={'hsl(40, 90%, 50%)'} />
+                fill={'hsl(40, 90%, 50%)'}/>
             </Layer>
           </Stage>
         </div>
@@ -227,14 +260,14 @@ const AffineTransformationsComponent: React.FC<AffineProps> = (props: AffineProp
                 <div className="form-group">
                   <label>x</label>
                   <input type="number" className="form-control" defaultValue={x}
-                         onChange={(e) => setX(parseInt(e.target.value))} />
+                         onChange={(e) => setX(parseInt(e.target.value))}/>
                 </div>
               </div>
               <div className="col text-left">
                 <div className="form-group">
                   <label>y</label>
                   <input type="number" className="form-control" defaultValue={y}
-                         onChange={(e) => setY(parseInt(e.target.value))} />
+                         onChange={(e) => setY(parseInt(e.target.value))}/>
                 </div>
               </div>
             </div>
@@ -246,7 +279,7 @@ const AffineTransformationsComponent: React.FC<AffineProps> = (props: AffineProp
               <div className="col text-left">
                 <div className="form-group">
                   <input type="number" className="form-control" defaultValue={radius}
-                         onChange={(e) => setRadius(parseInt(e.target.value))} />
+                         onChange={(e) => setRadius(parseInt(e.target.value))}/>
                 </div>
               </div>
             </div>
@@ -287,7 +320,7 @@ const AffineTransformationsComponent: React.FC<AffineProps> = (props: AffineProp
               <div className="col text-left">
                 <div className="form-group">
                   <input type="number" className="form-control" placeholder="2" defaultValue={scale}
-                         onChange={(e) => setScale(parseInt(e.target.value))} />
+                         onChange={(e) => setScale(parseInt(e.target.value))}/>
                 </div>
               </div>
             </div>
@@ -312,38 +345,5 @@ enum RotationOrigin {
   E,
   F
 }
-
-const RotationOrigins = {
-  center: {
-    id: RotationOrigin.Center,
-    name: "Center"
-  },
-  a: {
-    id: RotationOrigin.A,
-    name: "A(x, y)"
-  },
-  b: {
-    id: RotationOrigin.B,
-    name: "B(x, y)"
-  },
-  c: {
-    id: RotationOrigin.C,
-    name: "C(x, y)"
-  },
-  d: {
-    id: RotationOrigin.D,
-    name: "D(x, y)"
-  },
-  e: {
-    id: RotationOrigin.E,
-    name: "E(x, y)"
-  },
-  f: {
-    id: RotationOrigin.F,
-    name: "F(x, y)"
-  }
-};
-
-
 
 export default AffineTransformationsComponent;

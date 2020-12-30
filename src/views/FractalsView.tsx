@@ -1,4 +1,4 @@
-import React, {MutableRefObject, useRef, useState} from "react";
+import React, {useState} from "react";
 import {MDBBtn, MDBContainer} from "mdbreact";
 import FractalCanvasComponent from "../components/FractalCanvasComponent";
 
@@ -15,13 +15,15 @@ const FractalsView: React.FC = () => {
     setHueValues(hueValues);
   }
 
+  const [saveIndicator, doSave] = useState(0);
+
   return (
     <section className="m-5">
       <h1 className="text-center">Newton Fractals</h1>
 
       <MDBContainer className="text-center mt-5">
-        <FractalCanvasComponent  height={800} width={800} constValue={-1} orderValue={k} hueValues={hueValues} />
-
+        <FractalCanvasComponent  height={800} width={800} constValue={-1} orderValue={k} hueValues={hueValues}
+                                 saveImageIndicator={saveIndicator}/>
         <MDBContainer className="ml-3 text-center">
           <div className="d-flex flex-column">
             <div className="mt-2 text-left">
@@ -53,7 +55,7 @@ const FractalsView: React.FC = () => {
               </select>
             </div>
             <div className="mt-4 text-left">
-              <MDBBtn color="elegant" block>Save Image</MDBBtn>
+              <MDBBtn color="elegant" block onClick={() => doSave(prev=>prev+1)}>Save Image</MDBBtn>
             </div>
           </div>
         </MDBContainer>

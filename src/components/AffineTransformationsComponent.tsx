@@ -18,11 +18,17 @@ const AffineTransformationsComponent: React.FC<AffineProps> = (props: AffineProp
 
   const [x, setX] = useState(1);
   const [y, setY] = useState(1);
-  const [radius, setRadius] = useState(1);
+  const [radius, setRadius] = useState(50);
+  const [displayedRadius, setDisplayedRadius] = useState(1)
   const [rotationAngle, setRotationAngle] = useState(270);
   const [scale, setScale] = useState(2);
 
   const hexagonPoint = new Point(x, y);
+
+  const changeRadius = (r: number) => {
+    setRadius(r * snapSize);
+    setDisplayedRadius(r);
+  }
 
   const translatePoint = (point: Point, gridSnapSize = snapSize): Point => {
     return new Point(props.width / 2 + point.x * gridSnapSize, props.height / 2 - point.y * gridSnapSize);
@@ -101,33 +107,33 @@ const AffineTransformationsComponent: React.FC<AffineProps> = (props: AffineProp
       }
       case "a": {
         hexagon.offsetX(0);
-        hexagon.offsetY(-radius * snapSize);
+        hexagon.offsetY(-radius);
         hexagonPoint.y = -1;
         break;
       }
       case "b": {
-        hexagon.offsetX(radius * snapSize * Math.sqrt(3) / 2);
-        hexagon.offsetY(-radius * snapSize/ 2);
+        hexagon.offsetX(radius * Math.sqrt(3) / 2);
+        hexagon.offsetY(-radius / 2);
         break;
       }
       case "c": {
-        hexagon.offsetX(radius * snapSize * Math.sqrt(3) / 2);
-        hexagon.offsetY(radius * snapSize / 2);
+        hexagon.offsetX(radius * Math.sqrt(3) / 2);
+        hexagon.offsetY(radius / 2);
         break;
       }
       case "d": {
         hexagon.offsetX(0);
-        hexagon.offsetY(radius * snapSize);
+        hexagon.offsetY(radius);
         break;
       }
       case "e": {
-        hexagon.offsetX(-radius * snapSize * Math.sqrt(3) / 2);
-        hexagon.offsetY(radius * snapSize / 2);
+        hexagon.offsetX(-radius * Math.sqrt(3) / 2);
+        hexagon.offsetY(radius / 2);
         break;
       }
       case "f": {
-        hexagon.offsetX(-radius * snapSize * Math.sqrt(3) / 2);
-        hexagon.offsetY(-radius * snapSize / 2);
+        hexagon.offsetX(-radius * Math.sqrt(3) / 2);
+        hexagon.offsetY(-radius / 2);
         break;
       }
     }
@@ -140,27 +146,27 @@ const AffineTransformationsComponent: React.FC<AffineProps> = (props: AffineProp
     },
     a: {
       id: RotationOrigin.A,
-      name: `A(${x}, ${(y + radius).toFixed(2)})`
+      name: `A(${x}, ${(y + radius / snapSize).toFixed(2)})`
     },
     b: {
       id: RotationOrigin.B,
-      name: `B(${(x + radius * Math.sqrt(3) / 2).toFixed(2)}, ${(y + radius / 2).toFixed(2)})`
+      name: `B(${(x + radius / snapSize * Math.sqrt(3) / 2).toFixed(2)}, ${(y + radius / snapSize / 2).toFixed(2)})`
     },
     c: {
       id: RotationOrigin.C,
-      name: `C(${(x + radius * Math.sqrt(3) / 2).toFixed(2)}, ${(y - radius / 2).toFixed(2)})`
+      name: `C(${(x + radius / snapSize * Math.sqrt(3) / 2).toFixed(2)}, ${(y - radius / snapSize / 2).toFixed(2)})`
     },
     d: {
       id: RotationOrigin.D,
-      name: `D(${x}, ${y - radius})`
+      name: `D(${x}, ${(y - radius / snapSize).toFixed(2)})`
     },
     e: {
       id: RotationOrigin.E,
-      name: `E(${(x - radius * Math.sqrt(3) / 2).toFixed(2)}, ${(y - radius /  2).toFixed(2)})`
+      name: `E(${(x - radius /snapSize * Math.sqrt(3) / 2).toFixed(2)}, ${(y - radius / snapSize/ 2).toFixed(2)})`
     },
     f: {
       id: RotationOrigin.F,
-      name: `F(${(x - radius * Math.sqrt(3) / 2).toFixed(2)}, ${(y + radius / 2).toFixed(2)})`
+      name: `F(${(x - radius / snapSize * Math.sqrt(3) / 2).toFixed(2)}, ${(y + radius / snapSize / 2).toFixed(2)})`
     }
   };
 
@@ -243,7 +249,7 @@ const AffineTransformationsComponent: React.FC<AffineProps> = (props: AffineProp
                 x={translatePoint(hexagonPoint).x}
                 y={translatePoint(hexagonPoint).y}
                 sides={6}
-                radius={radius * snapSize}
+                radius={radius}
                 fill={'hsl(40, 90%, 50%)'}/>
             </Layer>
           </Stage>
@@ -278,8 +284,8 @@ const AffineTransformationsComponent: React.FC<AffineProps> = (props: AffineProp
             <div className="row">
               <div className="col text-left">
                 <div className="form-group">
-                  <input type="number" className="form-control" defaultValue={radius}
-                         onChange={(e) => setRadius(parseInt(e.target.value))}/>
+                  <input type="number" className="form-control" defaultValue={displayedRadius}
+                         onChange={(e) => changeRadius(parseInt(e.target.value))}/>
                 </div>
               </div>
             </div>

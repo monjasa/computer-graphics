@@ -18,8 +18,8 @@ const AffineTransformationsComponent: React.FC<AffineProps> = (props: AffineProp
 
   const hexagonPoint = new Point(1, 1);
 
-  const translatePoint = (point: Point): Point => {
-    return new Point(props.width / 2 + point.x * snapSize, props.height / 2 - point.y * snapSize);
+  const translatePoint = (point: Point, gridSnapSize = snapSize): Point => {
+    return new Point(props.width / 2 + point.x * gridSnapSize, props.height / 2 - point.y * gridSnapSize);
   }
 
   const gridLines = (): Konva.Line[] => {
@@ -63,18 +63,24 @@ const AffineTransformationsComponent: React.FC<AffineProps> = (props: AffineProp
 
   const handleClick = () => {
 
+    const tweenDuration = 5;
+
+    const updatedSnapSize = snapSize * 0.75;
+    const snapSizeDifference = (updatedSnapSize - snapSize) / 60 / tweenDuration;
+
     let tween = new Konva.Tween({
       node: hexagonRef.current!,
-      duration: 5,
+      duration: tweenDuration,
       easing: Konva.Easings.EaseInOut,
+      onUpdate: () => setSnapSize(prevState => prevState + snapSizeDifference),
+      x: translatePoint(hexagonPoint, updatedSnapSize).x,
+      y: translatePoint(hexagonPoint, updatedSnapSize).y,
       rotation: 270,
       scaleX: 2,
       scaleY: 2
     });
 
-    setTimeout(function () {
-      tween.play();
-    }, 1000);
+    setTimeout(() => tween.play(), 1000);
   }
 
   return (
@@ -131,6 +137,8 @@ const AffineTransformationsComponent: React.FC<AffineProps> = (props: AffineProp
             ref={hexagonRef}
             x={translatePoint(hexagonPoint).x}
             y={translatePoint(hexagonPoint).y}
+            offsetX={0}
+            offsetY={50}
             sides={6}
             radius={50}
             fill={'hsl(40, 90%, 50%)'} />

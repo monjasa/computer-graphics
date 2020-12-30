@@ -21,7 +21,7 @@ ReactDOM.render((
       <Route exact path="/" component={MainView} />
       <Route path='/fractals' component={FractalsView} />
       <Route path='/colors' component={ColorsView} />
-      <Route path='/affine_transformations' component={AffineTransformationsView} />
+      <Route path='/affine-transformations' component={AffineTransformationsView} />
       <Route path='/reference' component={MainView} />
     </Switch>
   </BrowserRouter>

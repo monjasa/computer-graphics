@@ -8,7 +8,7 @@ const AffineTransformationsView: React.FC = () => {
     <section className="m-5">
       <h1 className="text-center">Affine Transformations</h1>
       <MDBContainer className="text-center mt-4">
-        <AffineTransformationsComponent />
+        <AffineTransformationsComponent width={800} height={800} />
       </MDBContainer>
     </section>
   );

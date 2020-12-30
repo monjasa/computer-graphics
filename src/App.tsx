@@ -23,7 +23,7 @@ const App: React.FC = () => {
               <MDBNavLink to="/colors">Colors</MDBNavLink>
             </MDBNavItem>
             <MDBNavItem>
-              <MDBNavLink to="/affine_transformations">Affine Transformations</MDBNavLink>
+              <MDBNavLink to="/affine-transformations">Affine Transformations</MDBNavLink>
             </MDBNavItem>
             <MDBNavItem>
               <MDBNavLink to="/reference">Reference</MDBNavLink>

@@ -8,7 +8,7 @@ const ReferenceView: React.FC = () => {
   return (
     <section className="m-5">
       <h1 className="text-center mb-5">Reference</h1>
-      <Accordion>
+      <Accordion defaultActiveKey="0">
         <Card>
           <Accordion.Toggle as={Card.Header} eventKey="0">
             <h2><i className="fas fa-certificate"/> Newton Fractals</h2>
@@ -42,6 +42,11 @@ const ReferenceView: React.FC = () => {
                 a point of accumulation for each of the Fatou sets. It is this property that causes the fractal
                 structure of the Julia set (when the degree of the polynomial is larger than 2).
               </p>
+
+              <a target="_blank" href="http://paulbourke.net/fractals/newtonraphson/" className="my-link">
+                <button type="button" className="btn btn-outline-primary my-button">Read more</button>
+              </a>
+
               <p className="m-3">
                 <ReactPlayer className="center"
                              url='https://www.youtube.com/watch?v=7RZn3B709wo&ab_channel=MichaelHartley'
@@ -103,7 +108,7 @@ const ReferenceView: React.FC = () => {
 
         <Card>
           <Accordion.Toggle as={Card.Header} eventKey="2">
-            <h2><i className="fab fa-artstation"/>  Affine Transformation</h2>
+            <h2><i className="fab fa-artstation"/> Affine Transformation</h2>
           </Accordion.Toggle>
           <Accordion.Collapse eventKey="2">
             <Card.Body>

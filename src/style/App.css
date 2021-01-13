@@ -16,3 +16,11 @@
 .active {
   font-weight: 500;
 }
+
+.fas {
+  color: #2e2e2e;
+}
+
+.custom-range::-webkit-slider-thumb {
+  background: #2e2e2e;;
+}

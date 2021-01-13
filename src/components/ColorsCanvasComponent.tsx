@@ -3,7 +3,8 @@ import useImage from "use-image";
 import {Image, Layer, Stage} from 'react-konva';
 import Konva from "konva";
 import Color from "../utils/Color";
-import {MDBBtn} from "mdbreact";
+import {MDBBtn, MDBContainer} from "mdbreact";
+import ReactTooltip from "react-tooltip";
 
 interface ColorSchemeProps {
   imageSource: string,
@@ -19,7 +20,7 @@ const ColorsCanvasComponent: React.FC<ColorSchemeProps> = (props: ColorSchemePro
   const [pointHSLColor, setPointHSLColor] = useState<Color>(new Color(0, 0, 0));
   const [hue, setHue] = useState<number>(0);
   const [lightness, setLightness] = useState<number>(0);
-  const [saturation , setSaturation ] = useState<number>(0);
+  const [saturation, setSaturation] = useState<number>(0);
 
 
   const convertRGBtoHSL = (r: number, g: number, b: number): [number, number, number] => {
@@ -128,7 +129,7 @@ const ColorsCanvasComponent: React.FC<ColorSchemeProps> = (props: ColorSchemePro
     imageNode?.cache();
     imageNode?.filters([Konva.Filters.HSL]);
     imageNode?.hue(hue);
-    imageNode?.saturation (saturation);
+    imageNode?.saturation(saturation);
     imageNode?.luminance(lightness);
     imageNode?.getLayer()?.batchDraw();
   }, [hue, saturation, lightness]);
@@ -165,80 +166,94 @@ const ColorsCanvasComponent: React.FC<ColorSchemeProps> = (props: ColorSchemePro
   }
 
   return (
-    <div>
-      <Stage className="my-4" width={props.imgWidth} height={props.imgHeight}>
-        <Layer>
-          <Image
-            image={image}
-            ref={node => setImageNode(node as Konva.Image)}
-            width={props.imgWidth}
-            height={props.imgHeight}
-            onMouseMove={handleMouseMove}
-          />
-        </Layer>
-      </Stage>
-      <div className="row mt-5">
-        <div className="col text-left">
-          <div className="form-group">
-            <label>Red</label>
-            <input type="number" className="form-control" value={pointRGBColor?.firstComponent} placeholder="0"
-                   readOnly/>
-          </div>
-        </div>
-        <div className="col text-left">
-          <div className="form-group">
-            <label>Green</label>
-            <input type="number" className="form-control" value={pointRGBColor?.secondComponent} placeholder="0"
-                   readOnly/>
-          </div>
-        </div>
-        <div className="col text-left">
-          <div className="form-group">
-            <label>Blue</label>
-            <input type="number" className="form-control" value={pointRGBColor?.thirdComponent} placeholder="0"
-                   readOnly/>
-          </div>
-        </div>
+    <MDBContainer>
+      <div className="d-flex flex-column justify-content-center">
+        <Stage className="my-4" width={props.imgWidth} height={props.imgHeight}>
+          <Layer>
+            <Image
+              image={image}
+              ref={node => setImageNode(node as Konva.Image)}
+              width={props.imgWidth}
+              height={props.imgHeight}
+              onMouseMove={handleMouseMove}
+            />
+          </Layer>
+        </Stage>
       </div>
-      <div className="row mt-3">
-        <div className="col text-left">
-          <div className="form-group">
-            <label>Hue</label>
-            <input type="number" className="form-control" value={pointHSLColor?.firstComponent} placeholder="0"
-                   readOnly/>
-          </div>
-        </div>
-        <div className="col text-left">
-          <div className="form-group">
-            <label>Saturation</label>
-            <input type="number" className="form-control" value={pointHSLColor?.secondComponent} placeholder="0"
-                   readOnly/>
-          </div>
-        </div>
-        <div className="col text-left">
-          <div className="form-group">
-            <label>Lightness</label>
-            <input type="number" className="form-control" value={pointHSLColor?.thirdComponent} placeholder="0"
-                   readOnly/>
-          </div>
-        </div>
-      </div>
-      <div className="mt-4">
-        <label htmlFor="hue-range">Hue</label>
-        <input type="range" min="0" max="360" step="1" id="hue-range" className={"custom-range"}
-               onChange={event => setHue(Number.parseFloat(event.target.value))}/>
 
-        <label htmlFor="saturation-range">Saturation</label>
-        <input type="range" min="0" max="1" step="0.05" id="saturation-range" className={"custom-range"}
-               onChange={event => setSaturation(Number.parseFloat(event.target.value))}/>
+      <MDBContainer className="ml-5">
+        <div className="d-flex flex-column">
+          <div className="text-left">
+            <h3>Color components <i className="fas fa-question-circle fa-xs" data-tip="Tooltip text" /></h3>
+            <ReactTooltip place="right" effect="solid" />
+          </div>
+          <div className="row mt-3">
+            <div className="col text-left">
+              <div className="form-group">
+                <label>Red</label>
+                <input type="number" className="form-control" value={pointRGBColor?.firstComponent} placeholder="0"
+                       readOnly />
+              </div>
+            </div>
+            <div className="col text-left">
+              <div className="form-group">
+                <label>Green</label>
+                <input type="number" className="form-control" value={pointRGBColor?.secondComponent} placeholder="0"
+                       readOnly />
+              </div>
+            </div>
+            <div className="col text-left">
+              <div className="form-group">
+                <label>Blue</label>
+                <input type="number" className="form-control" value={pointRGBColor?.thirdComponent} placeholder="0"
+                       readOnly />
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col text-left">
+              <div className="form-group">
+                <label>Hue</label>
+                <input type="number" className="form-control" value={pointHSLColor?.firstComponent} placeholder="0"
+                       readOnly />
+              </div>
+            </div>
+            <div className="col text-left">
+              <div className="form-group">
+                <label>Saturation</label>
+                <input type="number" className="form-control" value={pointHSLColor?.secondComponent} placeholder="0"
+                       readOnly />
+              </div>
+            </div>
+            <div className="col text-left">
+              <div className="form-group">
+                <label>Lightness</label>
+                <input type="number" className="form-control" value={pointHSLColor?.thirdComponent} placeholder="0"
+                       readOnly />
+              </div>
+            </div>
+          </div>
+          <div className="mt-4 text-left">
+            <h3>Color grading <i className="fas fa-question-circle fa-xs" data-tip="Tooltip text" /></h3>
+            <ReactTooltip place="right" effect="solid" />
+          </div>
+          <div className="mt-3 text-left">
+            <label htmlFor="hue-range">Hue</label>
+            <input type="range" min="0" max="360" step="1" id="hue-range" className={"custom-range"}
+                   onChange={event => setHue(Number.parseFloat(event.target.value))} />
 
-        <label htmlFor="lightness-range">Lightness</label>
-        <input type="range" min="0" max="1" step="0.05" id="lightness-range" className={"custom-range"}
-               onChange={event => setLightness(Number.parseFloat(event.target.value))}/>
+            <label htmlFor="saturation-range">Saturation</label>
+            <input type="range" min="0" max="1" step="0.05" id="saturation-range" className={"custom-range"}
+                   onChange={event => setSaturation(Number.parseFloat(event.target.value))} />
 
-        <MDBBtn color="elegant" block onClick={saveImage}>Save Image</MDBBtn>
-      </div>
-    </div>
+            <label htmlFor="lightness-range">Lightness</label>
+            <input type="range" min="0" max="1" step="0.05" id="lightness-range" className={"custom-range"}
+                   onChange={event => setLightness(Number.parseFloat(event.target.value))} />
+          </div>
+          <MDBBtn className="mt-4" color="elegant" block onClick={saveImage}>Save Image</MDBBtn>
+        </div>
+      </MDBContainer>
+    </MDBContainer>
   );
 };
 

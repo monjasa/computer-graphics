@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {MDBBtn, MDBContainer} from "mdbreact";
 import FractalCanvasComponent from "../components/FractalCanvasComponent";
+import ReactTooltip from "react-tooltip";
 
 const FractalsView: React.FC = () => {
 
@@ -22,28 +23,30 @@ const FractalsView: React.FC = () => {
       <h1 className="text-center">Newton Fractals</h1>
 
       <MDBContainer className="text-center mt-5">
-        <FractalCanvasComponent  height={800} width={800} constValue={-1} orderValue={k} hueValues={hueValues}
-                                 saveImageIndicator={saveIndicator}/>
-        <MDBContainer className="ml-3 text-center">
+        <FractalCanvasComponent height={700} width={700} constValue={-1} orderValue={k} hueValues={hueValues}
+                                saveImageIndicator={saveIndicator} />
+        <MDBContainer className="text-center">
           <div className="d-flex flex-column">
             <div className="mt-2 text-left">
-              <h3>Choose power</h3>
+              <h3>Polynomial degree <i className="fas fa-question-circle fa-xs" data-tip="Tooltip text" /></h3>
+              <ReactTooltip place="right" effect="solid" />
             </div>
             <div className="my-2 text-left">
               <div className="form-check">
                 <input onClick={() => changeK(3)} className="form-check-input" type="radio" name="power"
                        id="power-cubic" value="3" defaultChecked />
-                <label className="form-check-label" htmlFor="power-cubic">Cubic (k = 3)</label>
+                <label className="form-check-label" htmlFor="power-cubic">Cubic &ndash; 3<sup>rd</sup> power</label>
               </div>
               <div className="form-check">
                 <input onClick={() => changeK(4)} className="form-check-input" type="radio" name="power"
                        id="power-quartic" value="4" />
-                <label className="form-check-label" htmlFor="power-quartic">Quartic (k = 4)</label>
+                <label className="form-check-label" htmlFor="power-quartic">Quartic &ndash; 4<sup>th</sup> power</label>
               </div>
             </div>
 
             <div className="mt-4 text-left">
-              <h3 className=""><label htmlFor="colors">Choose color palette</label></h3>
+              <h3>Color palette <i className="fas fa-question-circle fa-xs" data-tip="Tooltip text" /></h3>
+              <ReactTooltip place="right" effect="solid" />
             </div>
             <div className="text-left">
               <select onChange={e => changeHueValues(e.target.value
@@ -54,8 +57,8 @@ const FractalsView: React.FC = () => {
                 <option value="80, 310, 340, 15">Mellow Sunset</option>
               </select>
             </div>
-            <div className="mt-4 text-left">
-              <MDBBtn color="elegant" block onClick={() => doSave(prev=>prev+1)}>Save Image</MDBBtn>
+            <div className="mt-3 text-left">
+              <MDBBtn color="elegant" block onClick={() => doSave(prev => prev + 1)}>Save Image</MDBBtn>
             </div>
           </div>
         </MDBContainer>

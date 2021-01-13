@@ -3,6 +3,7 @@ import {Arrow, Layer, Line, RegularPolygon, Stage, Text} from "react-konva";
 import Point from "../utils/Point";
 import Konva from "konva";
 import {MDBBtn, MDBContainer} from "mdbreact";
+import ReactTooltip from "react-tooltip";
 
 interface AffineProps {
   height: number,
@@ -16,8 +17,8 @@ const AffineTransformationsComponent: React.FC<AffineProps> = (props: AffineProp
   const gridLayerRef = React.useRef<Konva.Layer>(null);
   const hexagonRef = React.useRef<Konva.RegularPolygon>(null);
 
-  const [x, setX] = useState(1);
-  const [y, setY] = useState(1);
+  const [x, setX] = useState(2);
+  const [y, setY] = useState(2);
   const [radius, setRadius] = useState(50);
   const [displayedRadius, setDisplayedRadius] = useState(1)
   const [rotationAngle, setRotationAngle] = useState(270);
@@ -162,7 +163,7 @@ const AffineTransformationsComponent: React.FC<AffineProps> = (props: AffineProp
     },
     e: {
       id: RotationOrigin.E,
-      name: `E(${(x - radius /snapSize * Math.sqrt(3) / 2).toFixed(2)}, ${(y - radius / snapSize/ 2).toFixed(2)})`
+      name: `E(${(x - radius / snapSize * Math.sqrt(3) / 2).toFixed(2)}, ${(y - radius / snapSize / 2).toFixed(2)})`
     },
     f: {
       id: RotationOrigin.F,
@@ -172,173 +173,174 @@ const AffineTransformationsComponent: React.FC<AffineProps> = (props: AffineProp
 
 
   return (
-    <div>
-      <MDBContainer className="text-center mt-5">
-        <div>
-          <Stage className="my-4" width={800} height={800}>
-            <Layer ref={gridLayerRef}>
-              {gridLines().map(item => (
-                <Line
-                  key={item.id()}
-                  name={item.id()}
-                  points={item.points()}
-                  stroke={item.stroke()}
-                  strokeWidth={item.strokeWidth()}/>
-              ))}
-            </Layer>
-            <Layer>
-              <Arrow
-                points={[props.width / 2, props.height, props.width / 2, 0]}
-                fill={'hsl(0, 0%, 15%)'}
-                stroke={'hsl(0, 0%, 15%)'}
-                strokeWidth={2}/>
-              <Arrow
-                points={[0, props.height / 2, props.width, props.height / 2]}
-                fill={'hsl(0, 0%, 15%)'}
-                stroke={'hsl(0, 0%, 15%)'}
-                strokeWidth={2}/>
+    <MDBContainer className="text-center">
+      <div>
+        <Stage className="my-4" width={800} height={800}>
+          <Layer ref={gridLayerRef}>
+            {gridLines().map(item => (
               <Line
-                points={[props.width / 2 + snapSize, props.height / 2 + 5, props.width / 2 + snapSize, props.height / 2 - 5]}
-                fill={'hsl(0, 0%, 15%)'}
-                stroke={'hsl(0, 0%, 15%)'}
-                strokeWidth={2}/>
-              <Line
-                points={[props.width / 2 - 5, props.height / 2 - snapSize, props.width / 2 + 5, props.height / 2 - snapSize]}
-                fill={'hsl(0, 0%, 15%)'}
-                stroke={'hsl(0, 0%, 15%)'}
-                strokeWidth={2}/>
-              <Text
-                x={props.width - 20}
-                y={props.height / 2 + 10}
-                text={'x'}
-                fontSize={16}
-                fontStyle={'bold'}
-                fill={'hsl(0, 0%, 15%)'}/>
-              <Text
-                x={props.width / 2 - 20}
-                y={10}
-                text={'y'}
-                fontSize={16}
-                fontStyle={'bold'}
-                fill={'hsl(0, 0%, 15%)'}/>
-              <Text
-                x={props.width / 2 - 20}
-                y={props.height / 2 + 10}
-                text={'0'}
-                fontSize={16}
-                fontStyle={'bold'}
-                fill={'hsl(0, 0%, 15%)'}/>
-              <Text
-                x={props.width / 2 + snapSize - 20}
-                y={props.height / 2 + 20}
-                text={'1.0'}
-                fontSize={16}
-                fontStyle={'bold'}
-                fill={'hsl(0, 0%, 15%)'}/>
-              <Text
-                x={props.width / 2 - 40}
-                y={props.height / 2 - snapSize}
-                text={'1.0'}
-                fontSize={16}
-                fontStyle={'bold'}
-                fill={'hsl(0, 0%, 15%)'}/>
-            </Layer>
-            <Layer>
-              <RegularPolygon
-                ref={hexagonRef}
-                x={translatePoint(hexagonPoint).x}
-                y={translatePoint(hexagonPoint).y}
-                sides={6}
-                radius={radius}
-                fill={'hsl(40, 90%, 50%)'}/>
-            </Layer>
-          </Stage>
-        </div>
+                key={item.id()}
+                name={item.id()}
+                points={item.points()}
+                stroke={item.stroke()}
+                strokeWidth={item.strokeWidth()} />
+            ))}
+          </Layer>
+          <Layer>
+            <Arrow
+              points={[props.width / 2, props.height, props.width / 2, 0]}
+              fill={'#2e2e2e'}
+              stroke={'#2e2e2e'}
+              strokeWidth={1} />
+            <Arrow
+              points={[0, props.height / 2, props.width, props.height / 2]}
+              fill={'#2e2e2e'}
+              stroke={'#2e2e2e'}
+              strokeWidth={1} />
+            <Line
+              points={[props.width / 2 + snapSize, props.height / 2 + 5, props.width / 2 + snapSize, props.height / 2 - 5]}
+              fill={'#2e2e2e'}
+              stroke={'#2e2e2e'}
+              strokeWidth={1} />
+            <Line
+              points={[props.width / 2 - 5, props.height / 2 - snapSize, props.width / 2 + 5, props.height / 2 - snapSize]}
+              fill={'#2e2e2e'}
+              stroke={'#2e2e2e'}
+              strokeWidth={1} />
+            <Text
+              x={props.width - 20}
+              y={props.height / 2 + 15}
+              text={'x'}
+              fontSize={14}
+              fontStyle={'bold'}
+              fill={'#2e2e2e'} />
+            <Text
+              x={props.width / 2 - 20}
+              y={10}
+              text={'y'}
+              fontSize={14}
+              fontStyle={'bold'}
+              fill={'#2e2e2e'} />
+            <Text
+              x={props.width / 2 - 20}
+              y={props.height / 2 + 15}
+              text={'0'}
+              fontSize={14}
+              fontStyle={'bold'}
+              fill={'#2e2e2e'} />
+            <Text
+              x={props.width / 2 + snapSize - 10}
+              y={props.height / 2 + 15}
+              text={'1.0'}
+              fontSize={14}
+              fontStyle={'bold'}
+              fill={'#2e2e2e'} />
+            <Text
+              x={props.width / 2 - 33}
+              y={props.height / 2 - snapSize - 5}
+              text={'1.0'}
+              fontSize={14}
+              fontStyle={'bold'}
+              fill={'#2e2e2e'} />
+          </Layer>
+          <Layer>
+            <RegularPolygon
+              ref={hexagonRef}
+              x={translatePoint(hexagonPoint).x}
+              y={translatePoint(hexagonPoint).y}
+              sides={6}
+              radius={radius}
+              fill={'hsl(40, 90%, 50%)'} />
+          </Layer>
+        </Stage>
+      </div>
 
-        <MDBContainer className="ml-3 text-center">
-          <div className="d-flex flex-column">
-
-            <div className="mt-2 text-center">
-              <h3>Origin position</h3>
-            </div>
-            <div className="row">
-              <div className="col text-left">
-                <div className="form-group">
-                  <label>x</label>
-                  <input type="number" className="form-control" defaultValue={x}
-                         onChange={(e) => setX(parseInt(e.target.value))}/>
-                </div>
-              </div>
-              <div className="col text-left">
-                <div className="form-group">
-                  <label>y</label>
-                  <input type="number" className="form-control" defaultValue={y}
-                         onChange={(e) => setY(parseInt(e.target.value))}/>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-2 text-center">
-              <h3>Hexagon radius</h3>
-            </div>
-            <div className="row">
-              <div className="col text-left">
-                <div className="form-group">
-                  <input type="number" className="form-control" defaultValue={displayedRadius}
-                         onChange={(e) => changeRadius(parseInt(e.target.value))}/>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-2 text-center">
-              <h3>Rotation origin</h3>
-            </div>
-            <div className="row">
-              <div className="col text-left">
-                <div className="form-group">
-                  <select className="custom-select" onChange={handleChange} name="rotation-origin">
-                    {Object.keys(RotationOrigins).map(key => (
-                      <option key={key} value={key}>
-                        {RotationOrigins[key].name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-2 text-center">
-              <h3>Rotation angle</h3>
-            </div>
-            <div className="row">
-              <div className="col text-left">
-                <div className="form-group">
-                  <input type="number" className="form-control" defaultValue={rotationAngle}
-                         onChange={(e) => setRotationAngle(parseInt(e.target.value))}/>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-2 text-center">
-              <h3>Scale</h3>
-            </div>
-            <div className="row">
-              <div className="col text-left">
-                <div className="form-group">
-                  <input type="number" className="form-control" placeholder="2" defaultValue={scale}
-                         onChange={(e) => setScale(parseInt(e.target.value))}/>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-4 text-left">
-              <MDBBtn color="elegant" block onClick={handleClick}>Transform</MDBBtn>
-            </div>
-
+      <MDBContainer className="text-center">
+        <div className="d-flex flex-column">
+          <div className="mt-2 text-left">
+            <h3>Origin position <i className="fas fa-question-circle fa-xs" data-tip="Tooltip text" /></h3>
+            <ReactTooltip place="right" effect="solid" />
           </div>
-        </MDBContainer>
+          <div className="row">
+            <div className="col text-left">
+              <div className="form-group">
+                <label>x</label>
+                <input type="number" className="form-control" defaultValue={x}
+                       onChange={(e) => setX(parseInt(e.target.value))} />
+              </div>
+            </div>
+            <div className="col text-left">
+              <div className="form-group">
+                <label>y</label>
+                <input type="number" className="form-control" defaultValue={y}
+                       onChange={(e) => setY(parseInt(e.target.value))} />
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-2 text-left">
+            <h3>Hexagon radius <i className="fas fa-question-circle fa-xs" data-tip="Tooltip text" /></h3>
+            <ReactTooltip place="right" effect="solid" />
+          </div>
+          <div className="row">
+            <div className="col text-left">
+              <div className="form-group">
+                <input type="number" className="form-control" defaultValue={displayedRadius}
+                       onChange={(e) => changeRadius(parseInt(e.target.value))} />
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-2 text-left">
+            <h3>Rotation origin <i className="fas fa-question-circle fa-xs" data-tip="Tooltip text" /></h3>
+            <ReactTooltip place="right" effect="solid" />
+          </div>
+          <div className="row">
+            <div className="col text-left">
+              <div className="form-group">
+                <select className="custom-select" onChange={handleChange} name="rotation-origin">
+                  {Object.keys(RotationOrigins).map(key => (
+                    <option key={key} value={key}>
+                      {RotationOrigins[key].name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-2 text-left">
+            <h3>Rotation angle <i className="fas fa-question-circle fa-xs" data-tip="Tooltip text" /></h3>
+            <ReactTooltip place="right" effect="solid" />
+          </div>
+          <div className="row">
+            <div className="col text-left">
+              <div className="form-group">
+                <input type="number" className="form-control" defaultValue={rotationAngle}
+                       onChange={(e) => setRotationAngle(parseInt(e.target.value))} />
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-2 text-left">
+            <h3>Hexagon scale <i className="fas fa-question-circle fa-xs" data-tip="Tooltip text" /></h3>
+            <ReactTooltip place="right" effect="solid" />
+          </div>
+          <div className="row">
+            <div className="col text-left">
+              <div className="form-group">
+                <input type="number" className="form-control" placeholder="2" defaultValue={scale}
+                       onChange={(e) => setScale(parseInt(e.target.value))} />
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-2 text-left">
+            <MDBBtn color="elegant" block onClick={handleClick}>Transform</MDBBtn>
+          </div>
+        </div>
       </MDBContainer>
-    </div>
+    </MDBContainer>
   );
 };
 

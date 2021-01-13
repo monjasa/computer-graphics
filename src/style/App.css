@@ -24,3 +24,12 @@
 .custom-range::-webkit-slider-thumb {
   background: #2e2e2e;;
 }
+
+.reference-paragraph-text {
+  line-height: 35px;
+  font-size: 18px;
+}
+
+.center {
+  margin: 0 auto;
+}

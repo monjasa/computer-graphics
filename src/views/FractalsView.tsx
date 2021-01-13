@@ -21,14 +21,14 @@ const FractalsView: React.FC = () => {
   return (
     <section className="m-5">
       <h1 className="text-center">Newton Fractals</h1>
-
+      <h3 className="text-center">F(z)=z<sup>k</sup>+c</h3>
       <MDBContainer className="text-center mt-5">
         <FractalCanvasComponent height={700} width={700} constValue={-1} orderValue={k} hueValues={hueValues}
                                 saveImageIndicator={saveIndicator} />
         <MDBContainer className="text-center">
           <div className="d-flex flex-column">
             <div className="mt-2 text-left">
-              <h3>Polynomial degree <i className="fas fa-question-circle fa-xs" data-tip="Tooltip text" /></h3>
+              <h3>Polynomial degree <i className="fas fa-question-circle fa-xs" data-tip="Choose power k for polynomial" /></h3>
               <ReactTooltip place="right" effect="solid" />
             </div>
             <div className="my-2 text-left">
@@ -45,7 +45,7 @@ const FractalsView: React.FC = () => {
             </div>
 
             <div className="mt-4 text-left">
-              <h3>Color palette <i className="fas fa-question-circle fa-xs" data-tip="Tooltip text" /></h3>
+              <h3>Color palette <i className="fas fa-question-circle fa-xs" data-tip="Choose color palette for fractal display" /></h3>
               <ReactTooltip place="right" effect="solid" />
             </div>
             <div className="text-left">

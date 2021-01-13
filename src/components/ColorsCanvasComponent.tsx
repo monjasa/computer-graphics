@@ -184,7 +184,7 @@ const ColorsCanvasComponent: React.FC<ColorSchemeProps> = (props: ColorSchemePro
       <MDBContainer className="ml-5">
         <div className="d-flex flex-column">
           <div className="text-left">
-            <h3>Color components <i className="fas fa-question-circle fa-xs" data-tip="Tooltip text" /></h3>
+            <h3>Color components <i className="fas fa-question-circle fa-xs" data-tip="Pixel color data in RGB and HSL model" /></h3>
             <ReactTooltip place="right" effect="solid" />
           </div>
           <div className="row mt-3">
@@ -234,7 +234,7 @@ const ColorsCanvasComponent: React.FC<ColorSchemeProps> = (props: ColorSchemePro
             </div>
           </div>
           <div className="mt-4 text-left">
-            <h3>Color grading <i className="fas fa-question-circle fa-xs" data-tip="Tooltip text" /></h3>
+            <h3>Color grading <i className="fas fa-question-circle fa-xs" data-tip="Change HSL color parameters for image" /></h3>
             <ReactTooltip place="right" effect="solid" />
           </div>
           <div className="mt-3 text-left">

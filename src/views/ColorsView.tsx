@@ -29,7 +29,7 @@ const ColorsView: React.FC = () => {
       <MDBContainer className="mt-4 container text-left">
         <div className="d-flex flex-column col-12">
           <div className="mt-4 text-left">
-            <h3>Source image <i className="fas fa-question-circle fa-xs" data-tip="Tooltip text" /></h3>
+            <h3>Source image <i className="fas fa-question-circle fa-xs" data-tip="Choose image you want work with" /></h3>
             <ReactTooltip place="right" effect="solid" />
           </div>
           <div className="mt-3 custom-file">

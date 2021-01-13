@@ -7,39 +7,145 @@ const ReferenceView: React.FC = () => {
 
   return (
     <section className="m-5">
-        <h1 className="text-center">Reference</h1>
+      <h1 className="text-center mb-5">Reference</h1>
       <Accordion>
         <Card>
           <Accordion.Toggle as={Card.Header} eventKey="0">
-            Newton Fractals
+            <h2><i className="fas fa-certificate"/> Newton Fractals</h2>
           </Accordion.Toggle>
           <Accordion.Collapse eventKey="0">
             <Card.Body>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda delectus laborum molestias pariatur quae soluta voluptates? Ad, dolorem eligendi error esse explicabo facilis incidunt labore laborum laudantium, nostrum quas, reprehenderit saepe soluta suscipit veniam veritatis vitae voluptas! Accusantium assumenda beatae cum eaque, eius est hic illo impedit ipsam itaque laborum magnam neque nostrum omnis perspiciatis placeat possimus quidem, quo sapiente sequi suscipit totam velit veniam, veritatis vero voluptas voluptatem! Ad animi architecto aut, delectus eaque expedita laborum libero magnam, maiores nostrum odio officiis porro provident, quasi quidem quis rem soluta totam veniam voluptas? Exercitationem odio officia officiis possimus quos voluptas.
-              <ReactPlayer url='https://www.youtube.com/watch?v=7RZn3B709wo&ab_channel=MichaelHartley'
-                           playing={true} />
+              <p className="reference-paragraph-text">
+                The Newton fractal is a boundary set in the complex plane which is characterized by Newton's method
+                applied to a fixed polynomial or transcendental function. It is the Julia set of the meromorphic
+                function
+              </p>
+              <p className="reference-paragraph-text">
+                which is given by Newton's method. When there are no attractive cycles (of order greater than 1),
+                it divides the complex plane into regions, each of which is associated with
+                a root. In this way the Newton fractal is similar to the Mandelbrot set, and like other fractals it
+                exhibits an intricate appearance arising from a simple description. It is relevant to numerical analysis
+                because it shows that (outside the region of quadratic convergence) the Newton method can be very
+                sensitive to its choice of start point.
+                Many points of the complex plane are associated with one of the for Newton's iteration,
+                yielding a sequence of points, If the sequence converges to the root, then was an element of the
+                region. However, for every polynomial of degree at least 2 there are points for which the Newton
+                iteration does not converge to any root: examples are the boundaries of the basins of attraction of the
+                various roots. There are even polynomials for which open sets of starting points fail to converge to any
+                root: a simple example is, where some points are attracted by the cycle 0, 1, 0, 1 ... rather than by a
+                root.
+              </p>
+              <p className="reference-paragraph-text">
+                An open set for which the iterations converge towards a given root or cycle (that is not a fixed point),
+                is a Fatou set for the iteration. The complementary set to the union of all these, is the Julia set.
+                The Fatou sets have common boundary, namely the Julia set. Therefore, each point of the Julia set is
+                a point of accumulation for each of the Fatou sets. It is this property that causes the fractal
+                structure of the Julia set (when the degree of the polynomial is larger than 2).
+              </p>
+              <p className="m-3">
+                <ReactPlayer className="center"
+                             url='https://www.youtube.com/watch?v=7RZn3B709wo&ab_channel=MichaelHartley'
+                             playing={false}
+                             height="500px"/>
+              </p>
             </Card.Body>
           </Accordion.Collapse>
         </Card>
 
         <Card>
           <Accordion.Toggle as={Card.Header} eventKey="1">
-            Color Schemes
+            <h2><i className="fas fa-palette"/> Color Schemes</h2>
           </Accordion.Toggle>
           <Accordion.Collapse eventKey="1">
             <Card.Body>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi hic necessitatibus nesciunt nisi similique! Ab ad adipisci amet animi consectetur debitis delectus deserunt dolores earum error eveniet ex, excepturi exercitationem expedita explicabo hic illum in incidunt laboriosam libero magnam molestias mollitia officia provident quae quaerat quam quia ratione rem reprehenderit sequi similique sint temporibus velit veritatis vitae voluptatem! Ab accusamus dignissimos dolores eius facere fugiat id, illum magnam, maiores nam nemo nihil nobis, perferendis quae quidem quis sapiente sit tempora velit voluptatum. Ad amet atque debitis delectus impedit ipsa minima nobis nulla optio praesentium quia quo, quod rerum unde vel. Ab consequatur, distinctio dolorum fugiat fugit id illum ipsum itaque laboriosam magnam nihil repellendus. Consequuntur dolores dolorum eos harum quam repellat repudiandae, temporibus. Ad cum cupiditate dolorum eligendi facilis ipsum molestiae qui sed sunt veritatis? Animi beatae doloremque explicabo facere illo iusto repellendus soluta voluptatum? Aliquam aliquid culpa dicta, dignissimos dolor doloremque doloribus error expedita facilis fugiat id illo modi molestiae nemo nihil nisi odit perspiciatis quam quo reiciendis repellat, sed tenetur ullam vitae voluptate voluptates voluptatum? Accusantium assumenda autem, commodi cumque doloribus earum error est fugiat magnam nobis perspiciatis qui quia reiciendis temporibus vitae voluptatem voluptates? Nesciunt, sint sit?
+              <p className="reference-paragraph-text">
+                The RGB color model is an additive color model in which red, green, and blue light are added together
+                in various ways to reproduce a broad array of colors. The name of the model comes from the initials of
+                the three additive primary colors, red, green, and blue.
+              </p>
+              <p className="reference-paragraph-text">
+                The main purpose of the RGB color model is for the sensing, representation, and display of images in
+                electronic systems, such as televisions and computers, though it has also been used in conventional
+                photography. Before the electronic age, the RGB color model already had a solid theory behind it,
+                based in human perception of colors.
+              </p>
+              <p className="reference-paragraph-text">
+                RGB is a device-dependent color model: different devices detect or reproduce a given RGB value
+                differently, since the color elements (such as phosphors or dyes) and their response to the individual
+                R, G, and B levels vary from manufacturer to manufacturer, or even in the same device over time.
+                Thus an RGB value does not define the same color across devices without some kind of color management.
+              </p>
+              <p className="reference-paragraph-text">
+                HSL (hue, saturation, lightness) and HSV (hue, saturation, value, also known as HSB or hue, saturation,
+                brightness) are alternative representations of the RGB color model, designed in the 1970s by computer
+                graphics researchers to more closely align with the way human vision perceives color-making attributes.
+                In these models, colors of each hue are arranged in a radial slice, around a central axis of neutral
+                colors which ranges from black at the bottom to white at the top.
+              </p>
+              <p className="reference-paragraph-text">
+                The HSV representation models the way paints of different colors mix together, with the saturation
+                dimension resembling various tints of brightly colored paint, and the value dimension resembling the
+                mixture of those paints with varying amounts of black or white paint. The HSL model attempts to resemble
+                more perceptual color models such as the Natural Color System (NCS) or Munsell color system, placing
+                fully saturated colors around a circle at a lightness value of ½, where a lightness value of 0 or 1 is
+                fully black or white, respectively.
+              </p>
+
+              <p className="m-3">
+                <ReactPlayer className="center"
+                             url='https://youtu.be/Ceur-ARJ4Wc'
+                             playing={false}
+                             height="500px"/>
+              </p>
             </Card.Body>
           </Accordion.Collapse>
         </Card>
 
         <Card>
           <Accordion.Toggle as={Card.Header} eventKey="2">
-            Affine Transformation
+            <h2><i className="fab fa-artstation"/>  Affine Transformation</h2>
           </Accordion.Toggle>
           <Accordion.Collapse eventKey="2">
             <Card.Body>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab aliquam aliquid amet autem culpa cumque cupiditate, debitis dicta dolor error eum explicabo facere harum hic illum ipsam iure labore magnam maiores, maxime modi molestias nulla perspiciatis quae quidem recusandae rem repellendus reprehenderit veniam vero voluptatem voluptates voluptatibus. Accusamus aperiam architecto assumenda at cumque deleniti eaque, eos facere fugiat mollitia natus necessitatibus nobis non odit placeat quam quis rerum saepe! Accusantium cupiditate, doloribus ducimus eveniet ex fugit illo, ipsa iusto maxime nemo odit perspiciatis porro quas ratione sed sequi sunt suscipit voluptatum? Accusantium amet aperiam architecto assumenda at atque beatae commodi consectetur consequuntur cumque deleniti deserunt dolores eaque earum exercitationem expedita fuga, fugit harum ipsum itaque labore laborum maiores molestiae necessitatibus nihil numquam officia, omnis optio placeat quia sapiente sequi soluta ullam vel, veniam vero voluptatibus. Adipisci ea error explicabo inventore libero modi odio quam repellendus rerum temporibus? Asperiores ducimus illo quisquam reiciendis sint voluptas! Animi beatae commodi dignissimos dolorum fugiat inventore ipsum maiores minima molestiae possimus quasi sunt, unde. Adipisci assumenda aut consequatur dicta dignissimos distinctio dolorum eum explicabo id itaque labore, maiores nemo nihil nostrum omnis perspiciatis quis, sapiente, soluta vero vitae? Ad asperiores aspernatur culpa, fuga ipsum maxime minus neque obcaecati quibusdam quo quos saepe ullam, vero voluptate voluptatem! Cumque dolor hic impedit magnam odit officia recusandae sed similique unde velit! A ab autem doloremque eaque hic nihil, officiis perspiciatis quam quasi quo sapiente soluta tenetur ullam ut velit. Animi asperiores eos explicabo molestiae odio qui quisquam rem rerum suscipit unde! Aliquid cum ducimus inventore maiores, sequi ullam! Aperiam autem distinctio fuga laborum libero non rem repellendus rerum saepe velit? Accusamus animi assumenda at beatae, cupiditate doloribus excepturi, expedita hic impedit iusto labore numquam quae, rem. Alias blanditiis illum ipsam iste molestias possimus quibusdam, sed tenetur voluptatem. A amet harum impedit iste necessitatibus nulla, pariatur porro unde! Ad, aspernatur beatae debitis doloremque incidunt ipsum iste laudantium maiores natus nostrum nulla pariatur, quasi veritatis. A ad aliquid deleniti dicta, distinctio dolorum eius eligendi, esse id incidunt laudantium nesciunt non officia pariatur placeat porro praesentium quibusdam quis suscipit veniam? Assumenda doloribus ducimus illum ipsa iure laborum magnam molestiae porro quae quam, qui quisquam quos reiciendis repellendus, sequi similique sit sunt ullam, velit voluptates? Aliquam aliquid at blanditiis cupiditate delectus deserunt dicta doloribus est et illum inventore, iusto laborum molestias nam natus nihil numquam, officia placeat porro possimus provident qui quia quibusdam quidem repellendus soluta tempore temporibus totam ullam voluptates. Accusamus architecto consequatur dicta doloremque iusto laudantium pariatur quisquam recusandae sed. Ad alias ipsa mollitia optio possimus? Asperiores blanditiis dicta dolorem doloremque ducimus earum eius ex fugit, in inventore ipsa ipsam laborum libero molestias nemo neque nesciunt nobis nostrum pariatur placeat qui recusandae sapiente soluta sunt totam vel voluptate? Consectetur dolores nesciunt odio veniam! Accusantium amet animi asperiores blanditiis, commodi dignissimos ducimus ea earum enim fugiat hic impedit, iste labore, mollitia natus nihil nostrum obcaecati officia provident quae quasi quis reiciendis tenetur vitae voluptas! Consectetur iusto labore non repellat sed.
+              <p className="reference-paragraph-text">
+                In Euclidean geometry, an affine transformation, or an affinity (from the Latin, affinis, "connected
+                with"), is a geometric transformation that preserves lines and parallelism (but not necessarily
+                distances
+                and angles).
+              </p>
+
+              <p className="reference-paragraph-text">
+                More generally, an affine transformation is an automorphism of an affine space (Euclidean spaces are
+                specific affine spaces), that is, a function which maps an affine space onto itself while preserving
+                both the dimension of any affine subspaces (meaning that it sends points to points, lines to lines,
+                planes to planes, and so on) and the ratios of the lengths of parallel line segments. Consequently,
+                sets of parallel affine subspaces remain parallel after an affine transformation. An affine
+                transformation
+                does not necessarily preserve angles between lines or distances between points, though it does preserve
+                ratios of distances between points lying on a straight line.
+              </p>
+              <p className="reference-paragraph-text">
+                If X is the point set of an affine space, then every affine transformation on X can be represented as
+                the composition of a linear transformation on X and a translation of X. Unlike a purely linear
+                transformation, an affine transformation need not preserve the origin of the affine space. Thus, every
+                linear transformation is affine, but not every affine transformation is linear.
+              </p>
+              <p className="reference-paragraph-text">
+                Examples of affine transformations include translation, scaling, homothety, similarity, reflection,
+                rotation, shear mapping, and compositions of them in any combination and sequence.
+              </p>
+              <p className="reference-paragraph-text">
+                Viewing an affine space as the complement of a hyperplane at infinity of a projective space, the affine
+                transformations are the projective transformations of that projective space that leave the hyperplane
+                at infinity invariant, restricted to the complement of that hyperplane.
+              </p>
+
+              <p className="m-3">
+                <ReactPlayer className="center"
+                             url='https://www.youtube.com/watch?v=il6Z5LCykZk&ab_channel=Udacity'
+                             playing={false}
+                             height="500px"/>
+              </p>
             </Card.Body>
           </Accordion.Collapse>
         </Card>

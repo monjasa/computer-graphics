@@ -183,7 +183,7 @@ const AffineTransformationsComponent: React.FC<AffineProps> = (props: AffineProp
                 name={item.id()}
                 points={item.points()}
                 stroke={item.stroke()}
-                strokeWidth={item.strokeWidth()} />
+                strokeWidth={item.strokeWidth()}/>
             ))}
           </Layer>
           <Layer>
@@ -191,57 +191,57 @@ const AffineTransformationsComponent: React.FC<AffineProps> = (props: AffineProp
               points={[props.width / 2, props.height, props.width / 2, 0]}
               fill={'#2e2e2e'}
               stroke={'#2e2e2e'}
-              strokeWidth={1} />
+              strokeWidth={1}/>
             <Arrow
               points={[0, props.height / 2, props.width, props.height / 2]}
               fill={'#2e2e2e'}
               stroke={'#2e2e2e'}
-              strokeWidth={1} />
+              strokeWidth={1}/>
             <Line
               points={[props.width / 2 + snapSize, props.height / 2 + 5, props.width / 2 + snapSize, props.height / 2 - 5]}
               fill={'#2e2e2e'}
               stroke={'#2e2e2e'}
-              strokeWidth={1} />
+              strokeWidth={1}/>
             <Line
               points={[props.width / 2 - 5, props.height / 2 - snapSize, props.width / 2 + 5, props.height / 2 - snapSize]}
               fill={'#2e2e2e'}
               stroke={'#2e2e2e'}
-              strokeWidth={1} />
+              strokeWidth={1}/>
             <Text
               x={props.width - 20}
               y={props.height / 2 + 15}
               text={'x'}
               fontSize={14}
               fontStyle={'bold'}
-              fill={'#2e2e2e'} />
+              fill={'#2e2e2e'}/>
             <Text
               x={props.width / 2 - 20}
               y={10}
               text={'y'}
               fontSize={14}
               fontStyle={'bold'}
-              fill={'#2e2e2e'} />
+              fill={'#2e2e2e'}/>
             <Text
               x={props.width / 2 - 20}
               y={props.height / 2 + 15}
               text={'0'}
               fontSize={14}
               fontStyle={'bold'}
-              fill={'#2e2e2e'} />
+              fill={'#2e2e2e'}/>
             <Text
               x={props.width / 2 + snapSize - 10}
               y={props.height / 2 + 15}
               text={'1.0'}
               fontSize={14}
               fontStyle={'bold'}
-              fill={'#2e2e2e'} />
+              fill={'#2e2e2e'}/>
             <Text
               x={props.width / 2 - 33}
               y={props.height / 2 - snapSize - 5}
               text={'1.0'}
               fontSize={14}
               fontStyle={'bold'}
-              fill={'#2e2e2e'} />
+              fill={'#2e2e2e'}/>
           </Layer>
           <Layer>
             <RegularPolygon
@@ -250,7 +250,7 @@ const AffineTransformationsComponent: React.FC<AffineProps> = (props: AffineProp
               y={translatePoint(hexagonPoint).y}
               sides={6}
               radius={radius}
-              fill={'hsl(40, 90%, 50%)'} />
+              fill={'hsl(40, 90%, 50%)'}/>
           </Layer>
         </Stage>
       </div>
@@ -258,42 +258,43 @@ const AffineTransformationsComponent: React.FC<AffineProps> = (props: AffineProp
       <MDBContainer className="text-center">
         <div className="d-flex flex-column">
           <div className="mt-2 text-left">
-            <h3>Origin position <i className="fas fa-question-circle fa-xs" data-tip="Tooltip text" /></h3>
-            <ReactTooltip place="right" effect="solid" />
+            <h3>Origin position <i className="fas fa-question-circle fa-xs"
+                                   data-tip="Set the center coordinates of the hexagon"/></h3>
+            <ReactTooltip place="right" effect="solid"/>
           </div>
           <div className="row">
             <div className="col text-left">
               <div className="form-group">
                 <label>x</label>
                 <input type="number" className="form-control" defaultValue={x}
-                       onChange={(e) => setX(parseInt(e.target.value))} />
+                       onChange={(e) => setX(parseInt(e.target.value))}/>
               </div>
             </div>
             <div className="col text-left">
               <div className="form-group">
                 <label>y</label>
                 <input type="number" className="form-control" defaultValue={y}
-                       onChange={(e) => setY(parseInt(e.target.value))} />
+                       onChange={(e) => setY(parseInt(e.target.value))}/>
               </div>
             </div>
           </div>
 
           <div className="mt-2 text-left">
-            <h3>Hexagon radius <i className="fas fa-question-circle fa-xs" data-tip="Tooltip text" /></h3>
-            <ReactTooltip place="right" effect="solid" />
+            <h3>Hexagon radius <i className="fas fa-question-circle fa-xs" data-tip="Set the hexagon radius"/></h3>
+            <ReactTooltip place="right" effect="solid"/>
           </div>
           <div className="row">
             <div className="col text-left">
               <div className="form-group">
                 <input type="number" className="form-control" defaultValue={displayedRadius}
-                       onChange={(e) => changeRadius(parseInt(e.target.value))} />
+                       onChange={(e) => changeRadius(parseInt(e.target.value))}/>
               </div>
             </div>
           </div>
 
           <div className="mt-2 text-left">
-            <h3>Rotation origin <i className="fas fa-question-circle fa-xs" data-tip="Tooltip text" /></h3>
-            <ReactTooltip place="right" effect="solid" />
+            <h3>Rotation origin <i className="fas fa-question-circle fa-xs" data-tip="Choose the point you want the hexagon to rotate around"/></h3>
+            <ReactTooltip place="right" effect="solid"/>
           </div>
           <div className="row">
             <div className="col text-left">
@@ -310,27 +311,27 @@ const AffineTransformationsComponent: React.FC<AffineProps> = (props: AffineProp
           </div>
 
           <div className="mt-2 text-left">
-            <h3>Rotation angle <i className="fas fa-question-circle fa-xs" data-tip="Tooltip text" /></h3>
-            <ReactTooltip place="right" effect="solid" />
+            <h3>Rotation angle <i className="fas fa-question-circle fa-xs" data-tip="Set the rotation angle magnitude of the hexagon transformation"/></h3>
+            <ReactTooltip place="right" effect="solid"/>
           </div>
           <div className="row">
             <div className="col text-left">
               <div className="form-group">
                 <input type="number" className="form-control" defaultValue={rotationAngle}
-                       onChange={(e) => setRotationAngle(parseInt(e.target.value))} />
+                       onChange={(e) => setRotationAngle(parseInt(e.target.value))}/>
               </div>
             </div>
           </div>
 
           <div className="mt-2 text-left">
-            <h3>Hexagon scale <i className="fas fa-question-circle fa-xs" data-tip="Tooltip text" /></h3>
-            <ReactTooltip place="right" effect="solid" />
+            <h3>Hexagon scale <i className="fas fa-question-circle fa-xs" data-tip="Set scale coefficient of the hexagon transformation"/></h3>
+            <ReactTooltip place="right" effect="solid"/>
           </div>
           <div className="row">
             <div className="col text-left">
               <div className="form-group">
                 <input type="number" className="form-control" placeholder="2" defaultValue={scale}
-                       onChange={(e) => setScale(parseInt(e.target.value))} />
+                       onChange={(e) => setScale(parseInt(e.target.value))}/>
               </div>
             </div>
           </div>
